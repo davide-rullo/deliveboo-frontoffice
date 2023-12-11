@@ -104,7 +104,9 @@ export default {
 
 
 <style lang="scss" scoped>
-/* .selected {
-    //background-image: ;
-} */
+.selected {
+    background-image: url('../../src/assets/img/banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 </style>

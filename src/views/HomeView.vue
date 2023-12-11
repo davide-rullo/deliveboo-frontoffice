@@ -1,9 +1,33 @@
 <script>
 import WordRotation from '../components/WordRotation.vue';
+import axios from 'axios';
 
 export default {
     name: 'HomeView',
-    components: { WordRotation }
+    components: { WordRotation },
+
+    data() {
+        return {
+            selected: null,
+            base_url: 'http://127.0.0.1:8000',
+            restaurant_selected: '/api/selected',
+        }
+    },
+    mounted() {
+        axios
+            .get(this.base_url + this.restaurant_selected)
+            .then(response => {
+                console.log(response);
+                this.selected = response.data.selected
+
+            })
+            .catch(err => {
+                console.error(err);
+            })
+
+
+
+    }
 }
 </script>
 
@@ -50,8 +74,32 @@ export default {
             </div> -->
         </div>
     </div>
+    <div class="selected">
+        <div class="container pt-4">
+            <div class="row row-cols-1 row-cols-sm-3 g-4 p-4">
+                <div class="col" v-for="restaurant in selected">
+                    <h1>test</h1>
+                    <!-- <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> -->
+                    <div class="card">
+
+                        <!-- <img class="img-fluid" :src="restaurant.logo" alt="" @error="restaurant.logo = `` base_url"> -->
+
+                        <div class="card-body">
+                            <h4 class="card-title">{{ restaurant.name }}</h4>
+
+                        </div>
+                    </div>
+                    <!-- </router-link> -->
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.selected {
+    background-image: ;
+}
+</style>

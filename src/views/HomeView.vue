@@ -9,8 +9,8 @@ export default {
     data() {
         return {
             selected: null,
-            base_url: 'http://127.0.0.1:8000',
-            restaurant_selected: '/api/selected',
+            base_url: 'http://127.0.0.1:8000/',
+            restaurant_selected: 'api/selected',
         }
     },
     mounted() {
@@ -77,12 +77,17 @@ export default {
     <div class="selected">
         <div class="container pt-4">
             <div class="row row-cols-1 row-cols-sm-3 g-4 p-4">
-                <div class="col" v-for="restaurant in selected">
-                    <h1>test</h1>
+                <div class="col" v-for="restaurant in selected ">
                     <!-- <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> -->
-                    <div class="card">
+                    <div class="card h-100 bg_my_light-pink shadow border-0">
 
-                        <!-- <img class="img-fluid" :src="restaurant.logo" alt="" @error="restaurant.logo = `` base_url"> -->
+                        <div class="card-img-top" v-if="restaurant.logo">
+                            <img class="img-fluid rounded" :src="base_url + `storage/` + restaurant.logo" alt="">
+                        </div>
+                        <div class="card-img-top" v-else>
+
+                            <img class="img-fluid rounded" :src="base_url + `storage/img/delivery.jpeg`" alt="">
+                        </div>
 
                         <div class="card-body">
                             <h4 class="card-title">{{ restaurant.name }}</h4>

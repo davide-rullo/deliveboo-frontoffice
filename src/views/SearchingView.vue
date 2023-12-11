@@ -1,6 +1,14 @@
 <script>
+import axios from 'axios';
 export default {
-    name: 'SearchingView'
+    name: 'SearchingView',
+    data() {
+        return {
+            APIurl: "http://127.0.0.1:8000/api/restaurants",
+            restaurants: [],
+
+        }
+    }
 }
 </script>
 

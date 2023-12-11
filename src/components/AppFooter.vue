@@ -1,5 +1,10 @@
+<script>
+export default {
+    name: 'AppFooter'
+}
+</script>
 <template>
-    <footer>
+    <footer class="bg_my_orange">
         <div class="container">
             <div class="container">
                 <div class="d-flex pt-5 justify-content-around">
@@ -116,14 +121,9 @@
     </footer>
 </template>
 
-<script>
-export default {
-    name: 'AppFooter'
-}
-</script>
 
 <style lang="scss" scoped>
-footer {
+/* footer {
     background-color: #eb585b;
-}
+} */
 </style>

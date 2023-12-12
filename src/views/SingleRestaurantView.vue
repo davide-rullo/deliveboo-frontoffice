@@ -22,7 +22,7 @@ export default {
         axios.get(url)
             .then(resp => {
                 console.log(resp);
-                /* if (resp.data.success) {
+                if (resp.data.success) {
                     console.log(resp.data.result);
                     this.restaurant = resp.data.result;
                     this.loading = false;
@@ -30,7 +30,7 @@ export default {
                     console.log('Non trovata');
                     this.$router.push({ name: 'NotFound' })
                     this.loading = false;
-                } */
+                }
 
             })
             .catch(err => {
@@ -46,62 +46,79 @@ export default {
         <h1 class="p-5 mb-4 jumbo shadow rounded-bottom-5"> Restaurant: <span class="fw-bold">{{ restaurant.name }}</span>
         </h1>
         <div class="container">
+            <button class="btn btn-outline-dark my-3" type="button">
+                <router-link class="nav-link" to="/searching">
+                    Back to restaurants
+                </router-link>
+            </button>
 
 
-            <div class="card mb-3 shadow-lg bg-dark text-white" v-if="!loading">
+            <div v-if="!loading">
+                <div class="card mb-3 shadow-lg bg_my_light-pink border-0">
 
-                <div class="row g-0 p-4">
-                    <div class="col-lg-5 text-center py-2">
-
-
-                        <img v-if="restaurant.logo != null" :src="this.base_url + '/storage/' + restaurant.logo"
-                            class="img-fluid" alt="">
-                        <img v-else :src="'https://picsum.photos/200/200?random=' + restaurant.id" class="img-fluid" alt="">
+                    <div class="row g-0 p-4">
+                        <div class="col-lg-5 text-center py-2">
 
 
+                            <img v-if="restaurant.logo != null" :src="this.base_url + 'storage/' + restaurant.logo"
+                                class="img-fluid" alt="">
+                            <img v-else :src="'https://picsum.photos/200/200?random=' + restaurant.id" class="img-fluid"
+                                alt="">
+
+
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="card-body">
+                                <h5 class="card-title fs-4 my-4"><span class="my_text_dark-pink">Name:
+                                    </span>{{ restaurant.name }}
+                                </h5>
+
+                                <p class="card-text fs-5 py-2"><span class="my_text_dark-pink">Address:
+                                    </span>{{ restaurant.address }}</p>
+                                <p class="card-text fs-5 py-2"><span class="my_text_dark-pink">Phone:
+                                    </span>{{ restaurant.phone }}</p>
+
+
+                                <div class="row row-cols-7">
+                                    <div class="d-flex col align-items-baseline" v-if="restaurant.types.length !== 0">
+                                        <span class="my_text_dark-pink card-text fs-5 py-2">Type: </span>
+                                        <ul class="d-flex align-items-center list-untyled gap-2 ps-2 flex-wrap g-3">
+
+
+                                            <li class="badge text-black bg_my_dark-pink"
+                                                v-for="tipology in restaurant.types">
+                                                <i class="fas fa-tag fa-xs fa-fw"></i>
+                                                {{ tipology.name }}
+                                            </li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-7">
-                        <div class="card-body">
-                            <h5 class="card-title fs-4 my-4"><span class="text-white-50">Name:
-                                </span>{{ restaurant.name }}
-                            </h5>
-
-                            <p class="card-text fs-5 py-4"><span class="text-white-50">Address:
-                                </span>{{ restaurant.address }}</p>
-
-                            <p class="card-text fs-5 py-4 text-white-50">Type: <span class="badge bg-secondary p-2">
-                                    {{ restaurant.type ? restaurant.type.name : 'None' }}
-                                </span></p>
-
-                            <div class="d-flex" v-if="restaurant.type.length !== 0">
-                                <span class="text-white-50">Type: </span>
-                                <ul class="d-flex list-untyled gap-1 ps-2">
 
 
-                                    <li class="badge bg-secondary" v-for="tipology in restaurant.types">
-                                        <i class="fas fa-tag fa-xs fa-fw"></i>
-                                        {{ tipology.name }}
-                                    </li>
 
 
-                                </ul>
+                </div>
+
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5">
+                    <div class="col" v-for="plate in restaurant.plates">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    {{ plate.name }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="card-footer d-flex justify-content-end bg-secondary bg-gradient align-items-center gap-4">
-
-
-
-
-
-
-
-
-                </div>
-
             </div>
+
+
+
 
             <div class="d-flex gap-2 align-items-center" v-else>
                 <Loader></Loader>

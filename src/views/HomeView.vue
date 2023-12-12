@@ -34,14 +34,21 @@ export default {
 <template>
     <div class="p-5 jumbotron shadow">
         <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">
-                Unleash the flavor with DeliveBoo: where taste meets convenience!
+            <div class="row">
+                <div class="col-9">
+                    <h1 class="display-5 fw-bold">
+                        Unleash the flavor with DeliveBoo: where taste meets convenience!
 
-            </h1>
-            <p class="col-md-8 fs-4 text-black">
-                Order, savor, repeat. Booster the Rooster 🐓 will guide your culinary journey one bite at a time. 🍔
-                #DeliveBooMagic"
-            </p>
+                    </h1>
+                    <p class="col-md-8 fs-4 text-black">
+                        Order, savor, repeat. Booster the Rooster 🐓 will guide your culinary journey one bite at a time. 🍔
+                        #DeliveBooMagic"
+                    </p>
+                </div>
+                <div class="col-3">
+                    <img class="img-fluid" src="../assets/img/pollo.png" alt="">
+                </div>
+            </div>
             <!-- <router-link to="/about" class="btn btn-primary btn-lg" type="button">About Us</router-link> -->
         </div>
     </div>
@@ -74,7 +81,7 @@ export default {
             </div> -->
         </div>
     </div>
-    <div class="selected">
+    <div class="selected vh-100">
         <div class="container pt-4">
             <div class="row row-cols-1 row-cols-sm-3 g-4 p-4">
                 <div class="col" v-for="restaurant in selected ">

@@ -102,7 +102,7 @@ export default {
     -->
 
     <!-- Contenuto principale della pagina -->
-    <div class="bg_my_light-pink">
+    <div class="bg_my_back">
 
         <div class="container py-5">
             <!-- Sezione delle tipologie di ristoranti -->
@@ -110,7 +110,8 @@ export default {
 
                 <!-- Bottone "See All Type" -->
                 <div class="d-flex">
-                    <div class="types card bg_my_light-pink border-0" @click="getRestaurants(this.base_url + this.apiRestaurants)"
+                    <div class="types card bg_my_light-pink border-0"
+                        @click="getRestaurants(this.base_url + this.apiRestaurants)"
                         style="width: 5rem; text-align: center;">
                         <!-- Immagine all'interno della card -->
                         <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type">
@@ -128,7 +129,7 @@ export default {
                         <h5>{{ tipology.name }}</h5>
                     </div>
                 </div>
-                
+
             </div>
 
             <!-- Sezione dei ristoranti -->
@@ -142,7 +143,7 @@ export default {
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
 
                             <!-- Card del ristorante -->
-                            <div class="card h-100 bg_my_light-pink shadow border-0">
+                            <div class="card h-100 bg-transparent border-0">
                                 <!-- Immagine del ristorante -->
 
                                 <div class="card-img-top" v-if="restaurant.logo">

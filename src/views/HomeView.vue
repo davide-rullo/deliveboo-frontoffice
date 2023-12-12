@@ -49,13 +49,11 @@ export default {
 
 
 
-    }
+    },
 }
 </script>
 
 <template>
-
-
     <div class="bg_my_orange ">
         <div class="p-5 jumbotron shadow jumbo_img">
             <div class="container py-5">
@@ -73,7 +71,7 @@ export default {
                         </p>
                     </div>
                     <div class="col-lg-2">
-                        <img class="img-fluid" src="../assets/img/pollo.png" alt="">
+                        <img class="img-fluid booster" src="../assets/img/pollo.png" alt="">
                     </div>
 
                 </div>
@@ -187,33 +185,8 @@ export default {
 
 
 <style lang="scss" scoped>
-/*.selected {
-    background-image: url('../../src/assets/img/banner.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-}*/
-
-/* .swiper {
-    width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-.swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 300px;
-    height: 300px;
-}
-
-.swiper-slide img {
-    display: block;
-    width: 100%;
-} */
-
-/* .selected {
+.selected {
     background-color: #ffadad48;
-
     padding-top: 9rem;
     margin-top: -14rem;
 }
@@ -240,5 +213,9 @@ export default {
 
 .word-carousel {
     margin: -1rem;
+}
+
+.booster {
+    padding-bottom: 8rem;
 }
 </style>

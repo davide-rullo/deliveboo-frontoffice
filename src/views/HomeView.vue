@@ -1,11 +1,32 @@
 <script>
+
 import WordRotation from '../components/WordRotation.vue';
 import axios from 'axios';
 
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+// Import Swiper styles
+import 'swiper/scss';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+// import required modules
+import { EffectCoverflow, Pagination } from 'swiper/modules';
+
+
+
 export default {
     name: 'HomeView',
-    components: { WordRotation },
+    components: {
+        WordRotation, Swiper,
+        SwiperSlide,
+    },
+    setup() {
+        return {
+            modules: [EffectCoverflow, Pagination],
 
+        };
+    },
     data() {
         return {
             selected: null,
@@ -81,13 +102,20 @@ export default {
             </div> -->
         </div>
     </div>
-    <div class="selected vh-100">
-        <div class="container pt-4">
-            <div class="row row-cols-1 row-cols-sm-3 g-4 p-4">
-                <div class="col" v-for="restaurant in selected ">
-                    <!-- <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> -->
-                    <div class="card h-100 bg_my_light-pink shadow border-0">
+    <div class="selected ">
+        <h2 class="text-center pt-5">Discover the best restaurants near you!</h2>
+        <div class="container d-flex align-items-center pb-5">
 
+            <swiper :effect="'coverflow'" :grabCursor="true" :centeredSlides="true" :slidesPerView="'auto'"
+                :coverflowEffect="{
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                }" :pagination="true" :modules="modules" class="mySwiper" :initialSlide="2">
+                <swiper-slide v-for="restaurant in selected ">
+                    <div class="card h-100 bg_my_light-pink shadow border-0">
                         <div class="card-img-top" v-if="restaurant.logo">
                             <img class="img-fluid rounded" :src="base_url + `storage/` + restaurant.logo" alt="">
                         </div>
@@ -101,19 +129,44 @@ export default {
 
                         </div>
                     </div>
-                    <!-- </router-link> -->
-                </div>
-            </div>
+                </swiper-slide>
+
+            </swiper>
+
         </div>
+
+
     </div>
 </template>
 
 
 
 <style lang="scss" scoped>
-.selected {
+/*.selected {
     background-image: url('../../src/assets/img/banner.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+}*/
+
+.swiper {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+}
+
+.swiper-slide img {
+    display: block;
+    width: 100%;
+}
+
+.selected {
+    background-color: #ffadad48;
 }
 </style>

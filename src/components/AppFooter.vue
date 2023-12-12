@@ -110,7 +110,7 @@ export default {
                 </div>
                 <div class="text-center pt-5 mt-5">
                     <div class="">
-                        &#169;2023 Boolean Bar - All Rights Reserved.
+                        &#169;2023 DeliveBoo - All Rights Reserved.
                     </div>
                 </div>
 

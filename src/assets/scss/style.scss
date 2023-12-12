@@ -9,6 +9,11 @@ $light-pink: #ffadad;
 $orange: #ffd6a5;
 $dark-pink: #eb585b;
 $yellow: #fdffb6;
+$back: rgba(255, 173, 173, 0.2823529412);
+
+.bg_my_back {
+    background-color: $back;
+}
 
 .bg_my_light-pink {
     background-color: $light-pink;
@@ -52,7 +57,7 @@ $yellow: #fdffb6;
 }
 
 header {
-    background-color: $orange;
+    background-color: $back;
 
     .my_logo_title {
         color: $dark-pink;

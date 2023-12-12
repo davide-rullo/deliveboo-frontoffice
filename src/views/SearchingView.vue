@@ -96,7 +96,7 @@ export default {
             <router-link to="/about" class="btn btn-primary btn-lg" type="button">About Us</router-link>
         </div>
     </div> -->
-    <div class="bg_my_light-pink">
+    <div class="bg_my_back">
         <div class="container py-5">
             <div class="d-flex justify-content-center gap-3 mb-5">
 
@@ -123,7 +123,7 @@ export default {
                     <div class="animated_card col text-center" v-for="restaurant in restaurants">
 
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
-                            <div class="card h-100 bg_my_light-pink shadow border-0">
+                            <div class="card h-100 bg-transparent border-0">
                                 <div class="card-img-top" v-if="restaurant.logo">
                                     <img class="img-fluid rounded" :src="base_url + `storage/` + restaurant.logo" alt="">
                                 </div>

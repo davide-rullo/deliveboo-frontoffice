@@ -83,7 +83,9 @@ export default {
 </script>
 
 <template>
-    <!-- <div class="p-5 mb-4 jumbotron shadow">
+    <!-- Intestazione della pagina -->
+    <!--
+    <div class="p-5 mb-4 jumbotron shadow">
         <div class="container-fluid py-5">
             <h1 class="display-5 fw-bold">
                 Our Cocktails
@@ -95,41 +97,57 @@ export default {
             </p>
             <router-link to="/about" class="btn btn-primary btn-lg" type="button">About Us</router-link>
         </div>
-    </div> -->
+    </div>
+    -->
+
+    <!-- Contenuto principale della pagina -->
     <div class="bg_my_light-pink">
         <div class="container py-5">
-            <div class="d-flex justify-content-center gap-3 mb-5">
+            <!-- Sezione delle tipologie di ristoranti -->
+            <div class="d-flex justify-content-center gap-4 mb-5">
 
+                <!-- Bottone "See All Type" -->
                 <div class="d-flex">
-                    <button class="btn btn-primary" @click="getRestaurants(this.base_url + this.apiRestaurants)">
-                        See All Type
-                    </button>
-
+                    <div class="types card bg_my_light-pink border-0" @click="getRestaurants(this.base_url + this.apiRestaurants)"
+                        style="width: 5rem; text-align: center;">
+                        <!-- Immagine all'interno della card -->
+                        <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type">
+                        <h5>All</h5>
+                    </div>
                 </div>
 
+                <!-- Tipologie di ristoranti -->
                 <div class="d-flex" v-for="tipology in types">
-                    <button class="btn btn-primary" @click="fetchType(tipology.slug)">
-                        {{ tipology.name }}
-                    </button>
-
+                    <div class="types card bg_my_light-pink border-0" @click="fetchType(tipology.slug)"
+                        style="width: 6rem; text-align: center;">
+                        <!-- Immagine all'interno della card -->
+                        <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
+                            :alt="tipology.name">
+                        <h5>{{ tipology.name }}</h5>
+                    </div>
                 </div>
-
-
+                
             </div>
 
+            <!-- Sezione dei ristoranti -->
             <div v-if="!loading">
 
+                <!-- Griglia di cards per i ristoranti -->
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     <div class="restaurant_card col text-center" v-for="restaurant in restaurants">
 
+                        <!-- Link alla pagina del ristorante -->
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
+                            <!-- Card del ristorante -->
                             <div class="card h-100 bg_my_light-pink shadow border-0">
+                                <!-- Immagine del ristorante -->
                                 <div class="card-img-top" v-if="restaurant.logo">
                                     <img class="img-fluid rounded" :src="base_url + `storage/` + restaurant.logo" alt="">
                                 </div>
                                 <div class="card-img-top" v-else>
                                     <img class="img-fluid rounded" :src="base_url + `storage/img/delivery.jpeg`" alt="">
                                 </div>
+                                <!-- Nome del ristorante -->
                                 <div class="card-body">
                                     <h4 class="card-title">{{ restaurant.name }}</h4>
                                 </div>
@@ -139,11 +157,13 @@ export default {
                     </div>
                 </div>
 
+                <!-- Paginazione -->
                 <div class="py-4">
                     <nav aria-label="Page navigation">
                         <ul class="pagination my-4">
+                            <!-- Pulsanti di navigazione -->
                             <li class="page-item" v-for="link in this.links" :class="link.active ? 'active' : ''">
-                                <!-- use v-for and v-bind on html to paginate the results -->
+                                <!-- Utilizzo di v-for e v-bind per la paginazione dei risultati -->
                                 <a class="page-link text-danger border-0" role="button" aria-label="Previous"
                                     v-html="link.label" @click="getRestaurants(link.url)">
                                 </a>
@@ -158,13 +178,29 @@ export default {
 
 
 
-<style lang="scss" scoped>
 
+<style lang="scss" scoped>
 .restaurant_card:hover {
-    transform: scale(1.05); /* Effetto di zoom-in al passaggio del mouse */
-    transition: transform 0.3s ease; /* Animazione smooth del cambiamento */
+    transform: scale(1.05);
+    /* Effetto di zoom-in al passaggio del mouse */
+    transition: transform 0.3s ease;
+    /* Animazione smooth del cambiamento */
 }
 
+.types:hover {
+    transform: rotate(10deg) scale(1.3);
+    /* Effetto di rotazione e zoom-in al passaggio del mouse */
+    transition: transform 0.4s ease;
+    /* Animazione smooth del cambiamento */
+    filter: brightness(1.2);
+    /* Aumento della luminosità */
+    opacity: 0.9;
+    /* Riduzione della trasparenza */
+    background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+    /* Aggiunta di un gradiente di sfondo */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* Aggiunta di ombra */
+}
 </style>
 
 

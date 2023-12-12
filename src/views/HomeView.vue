@@ -84,8 +84,8 @@ export default {
                 <div class="col-3 text-end mx-4">
                     <h2>Today I need</h2>
                 </div>
-                <div class="col-3">
-                    <WordRotation></WordRotation>
+                <div class="col-3  text-center px-1">
+                    <WordRotation class="bg_my_dark-pink rounded-pill py-2"></WordRotation>
                 </div>
             </div>
             <!-- <div class="d-flex justify-content-center gap-3 mb-5">

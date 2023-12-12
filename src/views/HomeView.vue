@@ -32,24 +32,27 @@ export default {
 </script>
 
 <template>
-    <div class="p-5 jumbotron shadow">
-        <div class="container-fluid py-5">
-            <div class="row">
-                <div class="col-9">
-                    <h1 class="display-5 fw-bold">
-                        Unleash the flavor with DeliveBoo: where taste meets convenience!
+    <div>
+        <div class="p-5 jumbotron shadow jumbo_img">
+            <div class="container-fluid py-5">
+                <div class="row">
+                    <div class="col-8">
+                        <h1 class="display-5 fw-bold">
+                            Unleash the flavor with DeliveBoo: where taste meets convenience!
 
-                    </h1>
-                    <p class="col-md-8 fs-4 text-black">
-                        Order, savor, repeat. Booster the Rooster 🐓 will guide your culinary journey one bite at a time. 🍔
-                        #DeliveBooMagic"
-                    </p>
+                        </h1>
+                        <p class="col-md-8 fs-4 text-black">
+                            Order, savor, repeat. Booster the Rooster 🐓 will guide your culinary journey one bite at a
+                            time. 🍔
+                            #DeliveBooMagic"
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <img class="img-fluid" src="../assets/img/pollo.png" alt="">
+                    </div>
                 </div>
-                <div class="col-3">
-                    <img class="img-fluid" src="../assets/img/pollo.png" alt="">
-                </div>
+                <!-- <router-link to="/about" class="btn btn-primary btn-lg" type="button">About Us</router-link> -->
             </div>
-            <!-- <router-link to="/about" class="btn btn-primary btn-lg" type="button">About Us</router-link> -->
         </div>
     </div>
     <div class="bg_my_light-pink shadow">
@@ -115,5 +118,13 @@ export default {
     background-image: url('../../src/assets/img/banner.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.jumbo_img {
+    background-image: url(../assets/img/jumbo.png);
+    background-position: top;
+    background-position: right;
+    background-repeat: no-repeat;
+
 }
 </style>

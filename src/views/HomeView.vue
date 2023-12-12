@@ -54,28 +54,30 @@ export default {
 </script>
 
 <template>
-    <div class="bg_my_orange ">
-        <div class="p-5 jumbotron shadow jumbo_img">
-            <div class="container py-5">
+    <div class="bg_my_back">
+        <div class="bg_my_orange rounded-top-5">
+            <div class="p-5 jumbotron shadow jumbo_img rounded-top-5">
+                <div class="container py-5">
 
 
-                <div class="row">
-                    <div class="col-lg-8">
-                        <h1 class="display-4 fw-bolder">
-                            Unleash the flavor with DeliveBoo: where taste meets convenience!
-                        </h1>
-                        <p class="col-md-8  fs-4 text-black">
-                            Order, savor, repeat. Booster the Rooster 🐓 will guide your culinary journey one bite at a
-                            time. 🍔
-                            #DeliveBooMagic"
-                        </p>
-                    </div>
-                    <div class="col-lg-2">
-                        <img class="img-fluid booster" src="../assets/img/pollo.png" alt="">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <h1 class="display-4 fw-bolder">
+                                Unleash the flavor with DeliveBoo: where taste meets convenience!
+                            </h1>
+                            <p class="col-md-8  fs-4 text-black">
+                                Order, savor, repeat. Booster the Rooster 🐓 will guide your culinary journey one bite at a
+                                time. 🍔
+                                #DeliveBooMagic"
+                            </p>
+                        </div>
+                        <div class="col-lg-2">
+                            <img class="img-fluid booster" src="../assets/img/pollo.png" alt="">
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
     </div>
@@ -200,6 +202,7 @@ export default {
     background: url('../assets/img/jumbo.png');
     background-position: top right;
     background-repeat: no-repeat;
+
 }
 
 .content {

@@ -7,7 +7,7 @@ export default {
 <template>
     <header>
 
-        <nav class="navbar navbar-expand-md shadow">
+        <nav class="navbar navbar-expand-md shadow bg_my_orange rounded-bottom-5">
             <div class="container">
 
                 <div class="d-none d-md-block">
@@ -43,7 +43,7 @@ export default {
                 <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavId">
                     <ul class="navbar-nav me-0 mt-2 mt-lg-0">
                         <li class="nav-item">
-                            <a class="btn btn-outline-dark rounded-pill" href="#">
+                            <a class="btn bg_my_dark-pink rounded-pill" href="http://127.0.0.1:8000/login">
                                 Login
                             </a>
                         </li>

@@ -42,7 +42,7 @@ export default {
 </script>
 
 <template>
-    <div class="bg_my_light-pink">
+    <div class="bg_my_back">
         <!-- <h1 class="p-5 mb-4 jumbo shadow rounded-bottom-5"> Restaurant: <span class="fw-bold">{{ restaurant.name }}</span>
         </h1> -->
         <div class="container">
@@ -54,7 +54,7 @@ export default {
 
 
             <div v-if="!loading">
-                <div class="card mb-3 shadow bg_my_dark-pink border-0">
+                <div class="card mb-3 shadow bg_my_dark-pink border-0 rounded-5">
 
                     <div class="row g-0 p-4">
                         <div class="col-lg-5 text-center py-2">
@@ -103,13 +103,13 @@ export default {
 
 
                 </div>
-                <h4 class="text-center mt-5 display-4 my_text_dark-pink">Our Menu</h4>
+                <h4 class="text-center mt-5 display-4 my_text_dark-pink">Menu</h4>
                 <div class="row row-cols-1 row-cols-lg-2 pb-5 g-3">
 
                     <div class="col" v-for="plate in restaurant.plates">
 
 
-                        <div class="animated_card card h-100 mb-3 shadow">
+                        <div class="animated_card card h-100 mb-3 shadow rounded-5">
                             <div class="row g-0">
                                 <div class="col-md-4 p-2 align-self-center">
                                     <img v-if="plate.cover_image != null"
@@ -120,7 +120,7 @@ export default {
 
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="card-body">
+                                    <div class="card-body py-3">
                                         <div class="d-flex justify-content-between">
                                             <h5 class="card-title">
                                                 {{ plate.name }}

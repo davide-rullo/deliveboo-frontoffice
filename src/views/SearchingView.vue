@@ -97,11 +97,13 @@ export default {
             </p>
             <router-link to="/about" class="btn btn-primary btn-lg" type="button">About Us</router-link>
         </div>
+
     </div>
     -->
 
     <!-- Contenuto principale della pagina -->
     <div class="bg_my_light-pink">
+
         <div class="container py-5">
             <!-- Sezione delle tipologie di ristoranti -->
             <div class="d-flex justify-content-center gap-4 mb-5">
@@ -138,9 +140,11 @@ export default {
 
                         <!-- Link alla pagina del ristorante -->
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
+
                             <!-- Card del ristorante -->
                             <div class="card h-100 bg_my_light-pink shadow border-0">
                                 <!-- Immagine del ristorante -->
+
                                 <div class="card-img-top" v-if="restaurant.logo">
                                     <img class="img-fluid rounded" :src="base_url + `storage/` + restaurant.logo" alt="">
                                 </div>

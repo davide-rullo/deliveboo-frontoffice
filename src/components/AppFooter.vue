@@ -4,8 +4,9 @@ export default {
 }
 </script>
 <template>
-    <footer class="bg_my_orange">
-        <div class="container">
+    <footer class="bg_my_back">
+        <div class="bg_my_orange rounded-top-5">
+
             <div class="container">
                 <div class="d-flex pt-5 justify-content-around">
                     <div class="pt-4 px-4">
@@ -117,6 +118,7 @@ export default {
 
 
             </div>
+
         </div>
     </footer>
 </template>

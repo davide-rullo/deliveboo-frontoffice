@@ -64,7 +64,16 @@ header {
     color: $dark-pink;
 }
 
+
+
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.animated_card:hover {
+    transform: scale(1.05);
+    /* Effetto di zoom-in al passaggio del mouse */
+    transition: transform 0.3s ease;
+    /* Animazione smooth del cambiamento */
 }

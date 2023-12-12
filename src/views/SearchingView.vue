@@ -134,7 +134,7 @@ export default {
 
                 <!-- Griglia di cards per i ristoranti -->
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <div class="restaurant_card col text-center" v-for="restaurant in restaurants">
+                    <div class="animated_card col text-center" v-for="restaurant in restaurants">
 
                         <!-- Link alla pagina del ristorante -->
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
@@ -175,9 +175,6 @@ export default {
         </div>
     </div>
 </template>
-
-
-
 
 <style lang="scss" scoped>
 .restaurant_card:hover {

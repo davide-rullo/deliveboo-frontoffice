@@ -23,7 +23,7 @@ export default {
                 setTimeout(() => {
                     this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
                 }, 0);
-            }, 3000);
+            }, 2000);
         },
         handleTransitionEnd() {
             this.isTransitioning = false;
@@ -46,7 +46,7 @@ export default {
 <style scoped lang="scss">
 .word-rotation {
     position: relative;
-    animation: rotateWords 15s infinite;
+    animation: rotateWords 10s infinite;
 }
 
 @keyframes rotateWords {

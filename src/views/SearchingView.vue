@@ -120,7 +120,7 @@ export default {
             <div v-if="!loading">
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <div class="restaurant_card col text-center" v-for="restaurant in restaurants">
+                    <div class="animated_card col text-center" v-for="restaurant in restaurants">
 
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
                             <div class="card h-100 bg_my_light-pink shadow border-0">
@@ -158,14 +158,7 @@ export default {
 
 
 
-<style lang="scss" scoped>
-
-.restaurant_card:hover {
-    transform: scale(1.05); /* Effetto di zoom-in al passaggio del mouse */
-    transition: transform 0.3s ease; /* Animazione smooth del cambiamento */
-}
-
-</style>
+<style lang="scss" scoped></style>
 
 
 

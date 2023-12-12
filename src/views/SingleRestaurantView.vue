@@ -103,13 +103,13 @@ export default {
 
 
                 </div>
-                <h4 class="text-center mt-5 display-4 my_text_dark-pink">Dish</h4>
+                <h4 class="text-center mt-5 display-4 my_text_dark-pink">Our Menu</h4>
                 <div class="row row-cols-1 row-cols-lg-2 pb-5 g-3">
 
                     <div class="col" v-for="plate in restaurant.plates">
 
 
-                        <div class="card h-100 mb-3 shadow">
+                        <div class="animated_card card h-100 mb-3 shadow">
                             <div class="row g-0">
                                 <div class="col-md-4 p-2 align-self-center">
                                     <img v-if="plate.cover_image != null"

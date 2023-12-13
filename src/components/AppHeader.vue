@@ -7,7 +7,7 @@ export default {
 <template>
     <header>
 
-        <nav class="navbar navbar-expand-md shadow bg_my_orange rounded-bottom-5">
+        <nav class="navbar navbar-expand-md shadow bg_my_orange">
             <div class="container">
 
                 <div class="d-none d-md-block">

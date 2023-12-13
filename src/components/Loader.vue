@@ -4,8 +4,10 @@ export default {
 }
 </script>
 <template>
-    <h2 class="vh-100">Loading</h2>
-    <div id="html-spinner"></div>
+    <div class="vh-100 d-flex gap-3">
+        <h2 class="my_text_dark-pink">Loading</h2>
+        <div id="html-spinner"></div>
+    </div>
 </template>
 
 
@@ -13,7 +15,7 @@ export default {
 #html-spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid black;
+    border: 4px solid #eb585b;
     border-top: 4px solid white;
     border-radius: 50%;
 }

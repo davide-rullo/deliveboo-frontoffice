@@ -4,7 +4,7 @@ export default {
 }
 </script>
 <template>
-    <h2>Loading</h2>
+    <h2 class="vh-100">Loading</h2>
     <div id="html-spinner"></div>
 </template>
 

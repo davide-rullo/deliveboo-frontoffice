@@ -1,5 +1,7 @@
 <script>
 import axios from 'axios';
+import Loader from '../components/Loader.vue';
+
 export default {
     name: 'SearchingView',
     data() {
@@ -14,6 +16,9 @@ export default {
             types: null,
 
         }
+    },
+    components: {
+        Loader
     },
     methods: {
 
@@ -105,35 +110,37 @@ export default {
     <div class="bg_my_back">
 
         <div class="container py-5">
-            <!-- Sezione delle tipologie di ristoranti -->
-            <div class="d-flex justify-content-center gap-4 mb-5">
 
-                <!-- Bottone "See All Type" -->
-                <div class="d-flex">
-                    <div class="types card bg_my_light-pink border-0"
-                        @click="getRestaurants(this.base_url + this.apiRestaurants)"
-                        style="width: 5rem; text-align: center;">
-                        <!-- Immagine all'interno della card -->
-                        <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type">
-                        <h5>All</h5>
-                    </div>
-                </div>
-
-                <!-- Tipologie di ristoranti -->
-                <div class="d-flex" v-for="tipology in types">
-                    <div class="types card bg_my_light-pink border-0" @click="fetchType(tipology.slug)"
-                        style="width: 6rem; text-align: center;">
-                        <!-- Immagine all'interno della card -->
-                        <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
-                            :alt="tipology.name">
-                        <h5>{{ tipology.name }}</h5>
-                    </div>
-                </div>
-
-            </div>
 
             <!-- Sezione dei ristoranti -->
             <div v-if="!loading">
+
+                <!-- Sezione delle tipologie di ristoranti -->
+                <div class="d-flex justify-content-center gap-4 mb-5">
+
+                    <!-- Bottone "See All Type" -->
+                    <div class="d-flex">
+                        <div class="types card bg-transparent border-0"
+                            @click="getRestaurants(this.base_url + this.apiRestaurants)"
+                            style="width: 5rem; text-align: center;">
+                            <!-- Immagine all'interno della card -->
+                            <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type">
+                            <h5>All</h5>
+                        </div>
+                    </div>
+
+                    <!-- Tipologie di ristoranti -->
+                    <div class="d-flex" v-for="tipology in types">
+                        <div class="types card bg-transparent border-0" @click="fetchType(tipology.slug)"
+                            style="width: 6rem; text-align: center;">
+                            <!-- Immagine all'interno della card -->
+                            <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
+                                :alt="tipology.name">
+                            <h5>{{ tipology.name }}</h5>
+                        </div>
+                    </div>
+
+                </div>
 
                 <!-- Griglia di cards per i ristoranti -->
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -177,6 +184,14 @@ export default {
                     </nav>
                 </div>
             </div>
+
+            <div class="py-4" v-else>
+                <Loader></Loader>
+            </div>
+
+
+
+
         </div>
     </div>
 </template>
@@ -202,6 +217,7 @@ export default {
     /* Aggiunta di un gradiente di sfondo */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     /* Aggiunta di ombra */
+    cursor: pointer;
 }
 </style>
 

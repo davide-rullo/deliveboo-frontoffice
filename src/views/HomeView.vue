@@ -54,6 +54,7 @@ export default {
 </script>
 
 <template>
+
     <div class="bg_my_orange  ">
         <div class="p-5 jumbotron shadow jumbo_img ">
             <div class="container py-5">
@@ -72,10 +73,12 @@ export default {
                     </div>
                     <div class="col-lg-2">
                         <img class="img-fluid booster" src="../assets/img/pollo.png" alt="">
+
+    
+
                     </div>
 
                 </div>
-
             </div>
         </div>
     </div>
@@ -218,12 +221,14 @@ export default {
     background-position: top right;
     background-repeat: no-repeat;
 
+
 }
 
 .overlay {
     height: 100%;
     position: relative;
     background-color: #0000007a;
+
 }
 
 .content {

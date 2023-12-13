@@ -54,14 +54,14 @@ export default {
 </script>
 
 <template>
-    <div class="bg_my_orange ">
-        <div class="p-5 jumbotron shadow jumbo_img">
+    <div class="bg_my_orange  ">
+        <div class="p-5 jumbotron shadow jumbo_img ">
             <div class="container py-5">
 
 
-                <div class="row">
+                <div class="row ">
                     <div class="col-lg-8">
-                        <h1 class="display-4 fw-bolder">
+                        <h1 class="display-4 fw-bolder ">
                             Unleash the flavor with DeliveBoo: where taste meets convenience!
                         </h1>
                         <p class="col-md-8  fs-4 text-black">
@@ -98,16 +98,33 @@ export default {
         </svg>
         <div class="bg_my_light-pink shadow word-carousel">
 
-            <div class="container py-5">
+            <div class="container waves-inside">
 
-                <div class="d-flex justify-content-center  align-items-center">
-                    <div class="col-3 text-end mx-4">
-                        <h2>Today I need</h2>
+                <div class="row">
+                    <div class="col-12 col-md-4 text-center">
+                        <img class="img-fluid position-relative z-2" width="200px" src="../assets/img/mockupdeliv2.png"
+                            alt="">
                     </div>
-                    <div class="col-3  text-center px-1">
-                        <WordRotation class="bg_my_dark-pink rounded-pill py-2"></WordRotation>
+                    <div class="col-12 col-md-8 text-center d-flex flex-column justify-content-center">
+
+                        <div class="row row-cols-1 row-cols-xl-2  p-3 justify-content-center">
+                            <div class="col ">
+                                <h2 class="display-4 ">Today I need</h2>
+                            </div>
+                            <div class="col">
+                                <WordRotation class="bg_my_dark-pink rounded-pill word-rot d-flex justify-content-center">
+                                </WordRotation>
+                            </div>
+                        </div>
+                        <div class="">
+                            <h3 class="text-muted">"Unleash the convenience power with Deliveboo and Booster the Rooster!
+                                Order your favorite dishes with just a tap on your smartphone and let the magic of flavor
+                                come straight to your doorstep. Let's turbocharge the food experience together, delivered
+                                with a touch of Booster's joy!"</h3>
+                        </div>
                     </div>
                 </div>
+
 
                 <!-- <div class="d-flex justify-content-center gap-3 mb-5">
                 <button class="btn btn-primary" @click="fetchAlcoholic">
@@ -143,7 +160,7 @@ export default {
     </div>
 
     <div class="selected ">
-        <h2 class="title-padding">Discover the best restaurants near you!</h2>
+        <h2 class="title-padding display-5 my_text_dark-pink">Discover the best restaurants near you!</h2>
 
         <div class="container d-flex align-items-center pb-5">
 
@@ -200,6 +217,13 @@ export default {
     background: url('../assets/img/jumbo.png');
     background-position: top right;
     background-repeat: no-repeat;
+
+}
+
+.overlay {
+    height: 100%;
+    position: relative;
+    background-color: #0000007a;
 }
 
 .content {
@@ -207,15 +231,18 @@ export default {
 }
 
 .title-padding {
-    padding-top: 6rem;
+    padding-top: 5rem;
     text-align: center;
 }
 
-.word-carousel {
-    margin: -1rem;
-}
+
 
 .booster {
     padding-bottom: 8rem;
+}
+
+
+.waves-inside {
+    margin: -1rem auto;
 }
 </style>

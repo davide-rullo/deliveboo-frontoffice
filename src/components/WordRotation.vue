@@ -37,7 +37,8 @@ export default {
 
 <template>
     <div>
-        <h2 :class="{ 'word-rotation': true, 'is-transitioning': isTransitioning }" @transitionend="handleTransitionEnd">
+        <h2 class="display-4" :class="{ 'word-rotation': true, 'is-transitioning': isTransitioning }"
+            @transitionend="handleTransitionEnd">
             {{ currentWord }}
         </h2>
     </div>

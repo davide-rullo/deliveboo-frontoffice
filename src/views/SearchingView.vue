@@ -15,6 +15,7 @@ export default {
             loading: true,
             types: null,
             selected_types: [],
+
         }
     },
     components: {
@@ -61,7 +62,7 @@ export default {
                 this.selected_types.push(slug);
 
             axios
-                .post("http://127.0.0.1:8000/api/types/selected_types", {
+                .post(this.base_url + "api/types/selected_types", {
                     selected_types: this.selected_types
                 })
                 .then(response => {
@@ -74,7 +75,21 @@ export default {
                     console.error(err);
                 });
         },
-
+        /* fetchType(slug) {
+            axios
+                .post("http://127.0.0.1:8000/api/types/selected_types", {
+                    selected_types: this.selected_types
+                })
+                .then(response => {
+                    console.log(response);
+                    this.restaurants = response.data.restaurants;
+                    console.log(this.restaurants);
+                    console.log(response.data.selected_types);
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }, */
         fetchAll() {
             axios
                 .get(this.base_url + this.apiRestaurants)

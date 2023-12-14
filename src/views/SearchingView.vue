@@ -77,11 +77,14 @@ export default {
         },
         /* fetchType(slug) {
             axios
-                .get(this.base_url + 'api/types/' + slug)
+                .post("http://127.0.0.1:8000/api/types/selected_types", {
+                    selected_types: this.selected_types
+                })
                 .then(response => {
                     console.log(response);
-                    this.restaurants = response.data.result.restaurants;
+                    this.restaurants = response.data.restaurants;
                     console.log(this.restaurants);
+                    console.log(response.data.selected_types);
                 })
                 .catch(err => {
                     console.error(err);
@@ -91,7 +94,7 @@ export default {
             axios
                 .get(this.base_url + this.apiRestaurants)
                 .then((response) => {
-                    console.log(response);
+                    console.log(response.data);
                     this.restaurants = response.data.restaurants;
                     console.log(this.restaurants);
                 })

@@ -5,7 +5,7 @@ import SearchingView from "./views/SearchingView.vue";
 import AboutView from "./views/AboutView.vue";
 import ContactView from "./views/ContactView.vue";
 import SingleRestaurantView from "./views/SingleRestaurantView.vue";
-
+import NotFoundView from "./views/NotFoundView.vue";
 
 const routes = [
     {
@@ -32,6 +32,11 @@ const routes = [
         path: '/restaurants/:slug',
         name: 'restaurant',
         component: SingleRestaurantView
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: NotFoundView
     },
 ];
 

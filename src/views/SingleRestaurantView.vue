@@ -1,6 +1,7 @@
 <script>
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
+import Cart from './CartView.vue';
 /* import { this } from '../this.js'; */
 
 export default {
@@ -16,13 +17,32 @@ export default {
             base_url: 'http://127.0.0.1:8000/',
             restaurant_api: 'api/restaurants/',
             loading: true,
+            selected_items: []
+        }
+    },
+    methods: {
+        addToChart(item) {
+            this.selected_items.push(item);
+            localStorage.setItem('selected_items', JSON.stringify(this.selected_items));
+            console.log(this.selected_items, "selected_items all'aggiunta di un oggetto dal localStorage");
+            console.log(localStorage.getItem('selected_items'), "localStorage all aggiunta di un oggetto");
+        },
+
+        removeToChart(item) {
+            if (this.selected_items.includes(item)) {
+                let index = this.selected_items.indexOf(item);
+                this.selected_items.splice(index, 1);
+            }
+            else {
+                return
+            }
         }
     },
     mounted() {
         const url = this.base_url + this.restaurant_api + this.$route.params.slug;
         axios.get(url)
             .then(resp => {
-                console.log(resp);
+                //console.log(resp);
                 if (resp.data.success) {
                     console.log(resp.data.result);
                     this.restaurant = resp.data.result.restaurant;
@@ -38,6 +58,19 @@ export default {
             .catch(err => {
                 console.log(err.message);
             })
+
+        console.log(localStorage.getItem('selected_items'), 'localStorage al momento del caricamento della pagina');
+        this.selected_items = JSON.parse(localStorage.getItem('selected_items')) || [];
+        console.log(this.selected_items, "selected_items al momento del caricamento della pagina");
+
+        //Per ripulire localStorage e selected_items in fase di test
+        /* localStorage.removeItem('selected_items');
+        this.selected_items = [];
+        console.log(this.selected_items);
+        console.log(localStorage.getItem('selected_items')); */
+
+
+
 
     }
 }
@@ -92,8 +125,6 @@ export default {
                                                 <i class="fas fa-tag fa-xs fa-fw"></i>
                                                 {{ tipology.name }}
                                             </li>
-
-
                                         </ul>
                                     </div>
                                 </div>
@@ -140,13 +171,16 @@ export default {
                                         <!-- <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
                                         <p v-else>Available: ❌</p> -->
 
+                                        <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
+                                        <p v-else>Available: ❌</p>
+                                        <div>
+                                            <button class="btn btn-dark" @click="addToChart(plate)">Add to Chart</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
 

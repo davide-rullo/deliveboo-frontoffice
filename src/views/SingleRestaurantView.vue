@@ -12,6 +12,7 @@ export default {
         return {
             /* this, */
             restaurant: {},
+            plates: {},
             base_url: 'http://127.0.0.1:8000/',
             restaurant_api: 'api/restaurants/',
             loading: true,
@@ -24,7 +25,8 @@ export default {
                 console.log(resp);
                 if (resp.data.success) {
                     console.log(resp.data.result);
-                    this.restaurant = resp.data.result;
+                    this.restaurant = resp.data.result.restaurant;
+                    this.plates = resp.data.result.plates;
                     this.loading = false;
                 } else {
                     console.log('Non trovata');
@@ -62,8 +64,7 @@ export default {
 
                             <img v-if="restaurant.logo != null" :src="this.base_url + 'storage/' + restaurant.logo"
                                 class="img-fluid" alt="">
-                            <img v-else :src="'https://picsum.photos/200/200?random=' + restaurant.id" class="img-fluid"
-                                alt="">
+                            <img v-else :src="base_url + `storage/img/delivery.jpeg`" class="img-fluid" alt="">
 
 
                         </div>
@@ -80,7 +81,8 @@ export default {
 
 
                                 <div class="row row-cols-7">
-                                    <div class="d-flex col align-items-baseline" v-if="restaurant.types.length !== 0">
+                                    <div class="d-flex col align-items-baseline"
+                                        v-if="restaurant.types && restaurant.types.length !== 0">
                                         <span class="text-white card-text fs-5 py-2">Type: </span>
                                         <ul class="d-flex align-items-center list-untyled gap-2 ps-2 flex-wrap g-3">
 
@@ -106,7 +108,7 @@ export default {
                 <h4 class="text-center mt-5 display-4 my_text_dark-pink">Menu</h4>
                 <div class="row row-cols-1 row-cols-lg-2 pb-5 g-3">
 
-                    <div class="col" v-for="plate in restaurant.plates">
+                    <div class="col" v-for="plate in plates">
 
 
                         <div class="animated_card card h-100 mb-3 shadow rounded-5">
@@ -115,8 +117,7 @@ export default {
                                     <img v-if="plate.cover_image != null"
                                         :src="this.base_url + 'storage/' + plate.cover_image" class="img-fluid card-img "
                                         alt="">
-                                    <img v-else :src="'https://picsum.photos/150/100?random=' + plate.id" class=" card-img"
-                                        alt="">
+                                    <img v-else :src="base_url + `storage/covers/panino.jpg`" class=" card-img" alt="">
 
                                 </div>
                                 <div class="col-md-8">
@@ -136,8 +137,8 @@ export default {
                                         }}</small>
                                         </p>
 
-                                        <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
-                                        <p v-else>Available: ❌</p>
+                                        <!-- <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
+                                        <p v-else>Available: ❌</p> -->
 
                                     </div>
                                 </div>

@@ -14,7 +14,7 @@ export default {
             lastPage: null,
             loading: true,
             types: null,
-
+            selected_types: [],
         }
     },
     components: {
@@ -53,22 +53,33 @@ export default {
                 })
         },
         fetchType(slug) {
+            if (this.selected_types.includes(slug)) {
+                let index = this.selected_types.indexOf(slug);
+                this.selected_types.splice(index, 1);
+            }
+            else
+                this.selected_types.push(slug);
+
             axios
-                .get(this.base_url + 'api/types/' + slug)
+                .post("http://127.0.0.1:8000/api/types/selected_types", {
+                    selected_types: this.selected_types
+                })
                 .then(response => {
                     console.log(response);
-                    this.restaurants = response.data.result.restaurants;
+                    this.restaurants = response.data.restaurants;
                     console.log(this.restaurants);
+                    console.log(response.data.selected_types);
                 })
                 .catch(err => {
                     console.error(err);
                 });
         },
+
         fetchAll() {
             axios
                 .get(this.base_url + this.apiRestaurants)
                 .then((response) => {
-                    console.log(response);
+                    console.log(response.data);
                     this.restaurants = response.data.restaurants;
                     console.log(this.restaurants);
                 })

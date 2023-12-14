@@ -37,32 +37,36 @@ export default {
         },
 
         getRestaurants(url) {
-            axios
-                .get(url)
-                .then(response => {
-                    console.log(response);
+        axios
+            .get(url)
+            .then(response => {
+                console.log(response);
 
-                    this.restaurants = response.data.restaurants.data;
-                    this.links = response.data.restaurants.links;
-                    console.log(this.links);
-                    this.lastPage = response.data.restaurants.last_page;
-                    //console.log(this.lastPage);
-                    this.loading = false;
-                })
-                .catch(err => {
-                    console.error(err);
-                })
-        },
+                // Resetta l'array delle tipologie selezionate
+                this.selected_types = [];
+
+                this.restaurants = response.data.restaurants.data;
+                this.links = response.data.restaurants.links;
+                console.log(this.links);
+                this.lastPage = response.data.restaurants.last_page;
+                this.loading = false;
+            })
+            .catch(err => {
+                console.error(err);
+            })
+    },
         fetchType(slug) {
-            if (this.selected_types.includes(slug)) {
+            const isSelected = this.selected_types.includes(slug);
+
+            if (isSelected) {
                 let index = this.selected_types.indexOf(slug);
                 this.selected_types.splice(index, 1);
-            }
-            else
+            } else {
                 this.selected_types.push(slug);
+            }
 
             axios
-                .post(this.base_url + "api/types/selected_types", {
+                .post("http://127.0.0.1:8000/api/types/selected_types", {
                     selected_types: this.selected_types
                 })
                 .then(response => {
@@ -75,6 +79,7 @@ export default {
                     console.error(err);
                 });
         },
+
         /* fetchType(slug) {
             axios
                 .post("http://127.0.0.1:8000/api/types/selected_types", {
@@ -158,6 +163,7 @@ export default {
                     <!-- Tipologie di ristoranti -->
                     <div class="d-flex" v-for="tipology in types">
                         <div class="types card bg-transparent border-0" @click="fetchType(tipology.slug)"
+                            :class="{ 'active-type': selected_types.includes(tipology.slug) }"
                             style="width: 6rem; text-align: center;">
                             <!-- Immagine all'interno della card -->
                             <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
@@ -165,6 +171,7 @@ export default {
                             <h5>{{ tipology.name }}</h5>
                         </div>
                     </div>
+
 
                 </div>
 
@@ -230,21 +237,40 @@ export default {
     /* Animazione smooth del cambiamento */
 }
 
-.types:hover {
+.types {
+    /* Alcune proprietà di base */
+    width: 6rem;
+    text-align: center;
+    transition: transform 0.4s ease, filter 0.4s ease, opacity 0.4s ease,  box-shadow 0.4s ease;
+
+    /* Stili di default */
+    background: transparent;
+    filter: brightness(1);
+    opacity: 1;
+    box-shadow: none;
+    cursor: pointer;
+
+    &:hover {
+        transform: rotate(10deg) scale(1.3);
+        filter: brightness(1.2);
+        opacity: 0.9;
+        background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+}
+
+
+.types.active-type {
     transform: rotate(10deg) scale(1.3);
-    /* Effetto di rotazione e zoom-in al passaggio del mouse */
-    transition: transform 0.4s ease;
-    /* Animazione smooth del cambiamento */
     filter: brightness(1.2);
-    /* Aumento della luminosità */
     opacity: 0.9;
-    /* Riduzione della trasparenza */
-    background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
-    /* Aggiunta di un gradiente di sfondo */
+    background: linear-gradient(to bottom right, #eb585b, #ffadad);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    /* Aggiunta di ombra */
     cursor: pointer;
 }
+
+
+
 </style>
 
 

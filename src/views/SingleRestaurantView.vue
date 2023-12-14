@@ -2,12 +2,14 @@
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
 import Cart from './CartView.vue';
+import { state } from '../state.js';
 /* import { this } from '../this.js'; */
 
 export default {
     name: 'SingleRestaurantView',
     components: {
-        Loader
+        Loader,
+        state
     },
     data() {
         return {
@@ -17,28 +19,75 @@ export default {
             base_url: 'http://127.0.0.1:8000/',
             restaurant_api: 'api/restaurants/',
             loading: true,
-            selected_items: []
+            alert: false,
+
         }
     },
     methods: {
         addToChart(item) {
-            this.selected_items.push(item);
-            localStorage.setItem('selected_items', JSON.stringify(this.selected_items));
-            console.log(this.selected_items, "selected_items all'aggiunta di un oggetto dal localStorage");
-            console.log(localStorage.getItem('selected_items'), "localStorage all aggiunta di un oggetto");
+
+            if (state.selected_items[0] !== undefined) {
+                console.log(state.selected_items[0], 'carr undefined');
+                if (state.selected_items[0].restaurant_id !== item.restaurant_id) {
+                    console.log(state.selected_items[0].restaurant_id, 'id_restaurant');
+                    this.alert = true;
+                    /* console.log(this.alert, 'addToChart'); */
+                    return;
+                }
+            }
+
+
+            const existItem = state.selected_items.find(
+                (selectedPlate) => selectedPlate.id === item.id);
+            console.log(existItem);
+
+            if (existItem) {
+                existItem.quantity += 1;
+                existItem.itemsTotalPrice = item.price * existItem.quantity;
+                state.totalPrice = item.price * existItem.quantity;
+            } else {
+                state.selected_items.push(item);
+                item['quantity'] = 1;
+                item['itemsTotalPrice'] = item.price * item.quantity;
+
+                state.totalPrice += item.price;
+            }
+
+            state.saveItems();
+            state.saveTotalPrice();
+
+            console.log(state.selected_items, 'carrello');
+
+
+
+
+
+
+
+
+            /* state.selected_items.push(item);
+            localStorage.setItem('selected_items', JSON.stringify(state.selected_items));
+            console.log(state.selected_items, "selected_items all'aggiunta di un oggetto dal localStorage");
+            console.log(localStorage.getItem('selected_items'), "localStorage all aggiunta di un oggetto"); */
+
         },
 
-        removeToChart(item) {
-            if (this.selected_items.includes(item)) {
-                let index = this.selected_items.indexOf(item);
-                this.selected_items.splice(index, 1);
-            }
-            else {
-                return
-            }
-        }
+        clearChart() {
+            state.selected_items = [];
+            state.saveItems();
+            state.totalPrice = 0;
+            state.saveTotalPrice();
+
+            this.alert = false;
+        },
+
+        modalClose() {
+            this.alert = false;
+        },
+
     },
     mounted() {
+
         const url = this.base_url + this.restaurant_api + this.$route.params.slug;
         axios.get(url)
             .then(resp => {
@@ -59,21 +108,27 @@ export default {
                 console.log(err.message);
             })
 
-        console.log(localStorage.getItem('selected_items'), 'localStorage al momento del caricamento della pagina');
-        this.selected_items = JSON.parse(localStorage.getItem('selected_items')) || [];
-        console.log(this.selected_items, "selected_items al momento del caricamento della pagina");
+        console.log(state.selected_items, 'questo');
+        console.log(this.alert, 'mounted');
+        console.log(state.savedItems, 'carrello salvato');
+
+        /* console.log(localStorage.getItem('selected_items'), 'localStorage al momento del caricamento della pagina');
+        state.selected_items = JSON.parse(localStorage.getItem('selected_items')) || [];
+        console.log(state.selected_items, "selected_items al momento del caricamento della pagina"); */
 
         //Per ripulire localStorage e selected_items in fase di test
         /* localStorage.removeItem('selected_items');
-        this.selected_items = [];
-        console.log(this.selected_items);
+        state.selected_items = [];
+        console.log(state.selected_items);
         console.log(localStorage.getItem('selected_items')); */
+
+        //this.clearChart();
 
 
 
 
     }
-}
+};
 </script>
 
 <template>
@@ -86,6 +141,8 @@ export default {
                     Back to restaurants
                 </router-link>
             </button>
+
+
 
 
             <div v-if="!loading">
@@ -135,6 +192,7 @@ export default {
 
 
 
+
                 </div>
                 <h4 class="text-center mt-5 display-4 my_text_dark-pink">Menu</h4>
                 <div class="row row-cols-1 row-cols-lg-2 pb-5 g-3">
@@ -171,17 +229,45 @@ export default {
                                         <!-- <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
                                         <p v-else>Available: ❌</p> -->
 
-                                        <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
-                                        <p v-else>Available: ❌</p>
+                                        <!-- <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
+                                        <p v-else>Available: ❌</p> -->
                                         <div>
                                             <button class="btn btn-dark" @click="addToChart(plate)">Add to Chart</button>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal Body -->
+                <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                <div class="modal" tabindex="-1" :class="{ show: alert }">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header flex-column">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    @click="modalClose"></button>
+
+                                <h5 class="modal-title text-warning fst-italic fw-bold fs-3">
+                                    Attenzione!
+                                </h5>
+                            </div>
+                            <div class="modal-body">
+                                <p class="fs-5">
+                                    Non puoi aggiungere piatti da un altro ristorante! Se vuoi
+                                    procedere devi prima svuotare il carrello.
+                                </p>
+                            </div>
+                            <button @click="clearChart(), closeErrorModal" type="button" class="btn btn-danger">
+                                Svuota il carrello
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -191,6 +277,8 @@ export default {
                 <Loader></Loader>
             </div>
 
+
+
         </div>
 
     </div>
@@ -198,4 +286,8 @@ export default {
 
 
 
-<style></style>
+<style>
+.modal.show {
+    display: block;
+}
+</style>

@@ -19,6 +19,7 @@ export default {
 }
 </script>
 <template>
+
     <h1 class="text-center">Your Cart</h1>
     <div class="container mt-5">
         <div v-if="state.savedItems.length === 0">
@@ -53,6 +54,7 @@ export default {
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 <style></style>

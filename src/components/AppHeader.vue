@@ -29,8 +29,8 @@ export default {
                                 <span class="visually-hidden">(current)</span></router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" active-class="active" to="/searching">Ricerca
-                                avanzata</router-link>
+                            <router-link class="nav-link" active-class="active" to="/searching">Advantage
+                                Searching</router-link>
                         </li>
                     </ul>
                 </div>
@@ -39,7 +39,7 @@ export default {
                     <ul class="navbar-nav me-0 mt-2 mt-lg-0">
                         <li class="nav-item">
                             <!-- Aggiungi un'icona cliccabile per la pagina del carrello con effetto hover -->
-                            <router-link to="/carrello" class="ms-2 text-decoration-none">
+                            <router-link to="/cart" class="ms-2 text-decoration-none">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#eb585b"
                                     class="bi bi-cart2" viewBox="0 0 16 16">
                                     <path
@@ -47,7 +47,7 @@ export default {
                                 </svg>
                             </router-link>
                         </li>
-                        <li class="nav-item ms-2"> <!-- Aggiunto margin-right per aggiungere spazio -->
+                        <li class="nav-item ms-4"> <!-- Aggiunto margin-right per aggiungere spazio -->
                             <a class="btn bg_my_dark-pink rounded-pill" href="http://127.0.0.1:8000/login">
                                 Login
                             </a>

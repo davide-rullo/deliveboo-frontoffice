@@ -9,7 +9,8 @@ export default {
     name: 'SingleRestaurantView',
     components: {
         Loader,
-        state
+        state,
+        Cart
     },
     data() {
         return {

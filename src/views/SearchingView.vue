@@ -132,10 +132,11 @@ export default {
                         <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
                             <div class="card h-100 bg-transparent border-0 restaurant_card">
                                 <div class="card-img-top" v-if="restaurant.logo">
-                                    <img class="img-fluid rounded" :src="base_url + `storage/` + restaurant.logo" alt="" />
+                                    <img class="img-fluid rounded-5" :src="base_url + `storage/` + restaurant.logo"
+                                        alt="" />
                                 </div>
                                 <div class="card-img-top" v-else>
-                                    <img class="img-fluid rounded" :src="base_url + `storage/img/delivery.jpeg`" alt="" />
+                                    <img class="img-fluid rounded-5" :src="base_url + `storage/img/delivery.jpeg`" alt="" />
                                 </div>
                                 <div class="card-body">
                                     <h4 class="card-title">{{ restaurant.name }}</h4>

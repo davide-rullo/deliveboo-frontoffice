@@ -11,7 +11,14 @@ export default {
 
     },
     methods: {
+        clearCart() {
+            state.selected_items = [];
+            state.saveItems();
+            state.totalPrice = 0;
+            state.saveTotalPrice();
 
+            this.alert = false;
+        }
     },
 
     mounted() {
@@ -94,8 +101,11 @@ export default {
                 <div class="col">
                 </div>
                 <div class="col  d-flex align-items-center justify-content-center">
-                    <button class="btn text-bg-success">
+                    <button class="btn btn-primary">
                         Go to checkout
+                    </button>
+                    <button @click="clearCart()" type="button" class="btn btn-secondary ms-3">
+                        Clear Cart
                     </button>
                 </div>
             </div>

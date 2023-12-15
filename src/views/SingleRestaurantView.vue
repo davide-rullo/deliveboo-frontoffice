@@ -25,7 +25,7 @@ export default {
         }
     },
     methods: {
-        addToChart(item) {
+        addToCart(item) {
 
             if (state.selected_items != [] && state.selected_items[0] !== undefined) {
                 /*  console.log(state.selected_items[0], 'carr undefined'); */
@@ -33,7 +33,7 @@ export default {
                 if (state.selected_items[0].restaurant_id !== item.restaurant_id) {
                     console.log(state.selected_items[0].restaurant_id, 'id_restaurant');
                     this.alert = true;
-                    /* console.log(this.alert, 'addToChart'); */
+                    /* console.log(this.alert, 'addToCart'); */
                     return;
                 }
             }
@@ -74,7 +74,7 @@ export default {
 
         },
 
-        clearChart() {
+        clearCart() {
             state.selected_items = [];
             state.saveItems();
             state.totalPrice = 0;
@@ -129,7 +129,7 @@ export default {
         console.log(state.selected_items);
         console.log(localStorage.getItem('selected_items')); */
 
-        //this.clearChart();
+        //this.clearCart();
 
 
 
@@ -160,8 +160,8 @@ export default {
 
 
                             <img v-if="restaurant.logo != null" :src="this.base_url + 'storage/' + restaurant.logo"
-                                class="img-fluid" alt="">
-                            <img v-else :src="base_url + `storage/img/delivery.jpeg`" class="img-fluid" alt="">
+                                class="img-fluid rounded-5" alt="">
+                            <img v-else :src="base_url + `storage/img/delivery.jpeg`" class="img-fluid rounded-5" alt="">
 
 
                         </div>
@@ -211,9 +211,10 @@ export default {
                             <div class="row g-0">
                                 <div class="col-md-4 p-2 align-self-center">
                                     <img v-if="plate.cover_image != null"
-                                        :src="this.base_url + 'storage/' + plate.cover_image" class="img-fluid card-img "
+                                        :src="this.base_url + 'storage/' + plate.cover_image"
+                                        class="img-fluid card-img rounded-5" alt="">
+                                    <img v-else :src="base_url + `storage/covers/panino.jpg`" class="card-img rounded-5"
                                         alt="">
-                                    <img v-else :src="base_url + `storage/covers/panino.jpg`" class=" card-img" alt="">
 
                                 </div>
                                 <div class="col-md-8">
@@ -239,7 +240,7 @@ export default {
                                         <!-- <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
                                         <p v-else>Available: ❌</p> -->
                                         <div>
-                                            <button class="btn btn-dark" @click="addToChart(plate)">Add to Cart</button>
+                                            <button class="btn btn-dark" @click="addToCart(plate)">Add to Cart</button>
                                         </div>
 
                                     </div>
@@ -258,18 +259,18 @@ export default {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                     @click="modalClose"></button>
 
-                                <h5 class="modal-title text-warning fst-italic fw-bold fs-3">
-                                    Attenzione!
+                                <h5 class="modal-title my_text_dark-pink fw-bold fs-3">
+                                    Warning!
                                 </h5>
                             </div>
                             <div class="modal-body">
                                 <p class="fs-5">
-                                    Non puoi aggiungere piatti da un altro ristorante! Se vuoi
-                                    procedere devi prima svuotare il carrello.
+                                    You can't add dish from different restaurants on the same order. Do You want to clear
+                                    Your cart?
                                 </p>
                             </div>
-                            <button @click="clearChart(), closeErrorModal" type="button" class="btn btn-danger">
-                                Svuota il carrello
+                            <button @click="clearCart(), closeErrorModal" type="button" class="btn btn-success">
+                                Clear Cart
                             </button>
                         </div>
                     </div>

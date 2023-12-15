@@ -4,7 +4,9 @@ export default {
     name: 'CartView',
     data() {
         return {
-            state
+            state,
+            cartItems: [],
+            cartPrice: null
         }
 
     },
@@ -13,22 +15,25 @@ export default {
     },
 
     mounted() {
-        state.savedItems = JSON.parse(state.savedItems);
+        this.cartItems = JSON.parse(state.savedItems);
+        this.cartPrice = JSON.parse(state.savedPrice);
         console.log(state.savedItems);
+        console.log(this.cartItems);
+        console.log(this.cartPrice);
     }
 }
 </script>
 <template>
     <h1 class="text-center">Your Cart</h1>
     <div class="container mt-5">
-        <div v-if="state.savedItems.length === 0">
+        <div v-if="this.cartItems.length === 0">
             <p class="text-center">Your Cart is empty</p>
         </div>
         <div v-else>
             <h2 class="text-center">Riepilogo ordine</h2>
             <div class="d-flex align-items-center justify-content-around border border-3 rounded-5 border-black ms-5 py-2 item_card bg_custom mt-3"
                 v-for="
-        item in state.savedItems">
+        item in this.cartItems">
                 <div class="col-3">
                     <img :src=item.cover_image alt="">
                 </div>
@@ -41,7 +46,7 @@ export default {
                     <button>+</button>
                 </div>
                 <div class="col-3">
-                    <span>{{ item.price * item.quantity }}</span>
+                    <span>{{ item.itemsTotalPrice }}</span>
                 </div>
             </div>
             <div class="row d-flex ms-5">

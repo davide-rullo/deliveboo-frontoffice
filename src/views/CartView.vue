@@ -10,7 +10,7 @@ export default {
 }
 </script>
 <template>
-    <h1>Carrello</h1>
+    <h1>Carrello 2</h1>
     <div>
 
     </div>

@@ -27,8 +27,9 @@ export default {
     methods: {
         addToChart(item) {
 
-            if (state.selected_items[0] !== undefined) {
-                console.log(state.selected_items[0], 'carr undefined');
+            if (state.selected_items != [] && state.selected_items[0] !== undefined) {
+                /*  console.log(state.selected_items[0], 'carr undefined'); */
+                console.log(state.selected_items[0]);
                 if (state.selected_items[0].restaurant_id !== item.restaurant_id) {
                     console.log(state.selected_items[0].restaurant_id, 'id_restaurant');
                     this.alert = true;

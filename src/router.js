@@ -7,6 +7,8 @@ import ContactView from "./views/ContactView.vue";
 import SingleRestaurantView from "./views/SingleRestaurantView.vue";
 import NotFoundView from "./views/NotFoundView.vue";
 import CartView from "./views/CartView.vue";
+import CheckoutView from "./views/CheckoutView.vue";
+
 
 const routes = [
     {
@@ -43,6 +45,11 @@ const routes = [
         path: '/cart',
         name: 'Cart',
         component: CartView
+    },
+    {
+        path: '/checkout',
+        name: 'Checkout',
+        component: CheckoutView
     }
 ];
 

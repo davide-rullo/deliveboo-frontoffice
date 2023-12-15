@@ -2,13 +2,15 @@ import { reactive } from "vue";
 
 export const state = reactive({
 
+    base_url: 'http://127.0.0.1:8000/',
+
     selected_items: [],
+
+    totalPrice: 0,
 
     savedItems: localStorage.getItem('selected_items'),
 
     savedPrice: localStorage.getItem('totalPrice'),
-
-    totalPrice: 0,
 
     saveItems() {
         localStorage.setItem('selected_items', JSON.stringify(this.selected_items));

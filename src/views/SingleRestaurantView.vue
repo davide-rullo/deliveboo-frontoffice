@@ -95,10 +95,13 @@ export default {
                 //console.log(resp);
                 if (resp.data.success) {
                     console.log(resp.data.result);
+                    console.log(this.$route.params.slug);
+
                     this.restaurant = resp.data.result.restaurant;
                     this.plates = resp.data.result.plates;
                     this.loading = false;
                 } else {
+                    console.log(resp.data.result + "non trovata");
                     console.log('Non trovata');
                     this.$router.push({ name: 'NotFound' })
                     this.loading = false;
@@ -107,6 +110,8 @@ export default {
             })
             .catch(err => {
                 console.log(err.message);
+                this.$router.push({ name: 'NotFound' })
+                this.loading = false;
             })
 
         console.log(state.selected_items, 'questo');
@@ -233,7 +238,7 @@ export default {
                                         <!-- <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
                                         <p v-else>Available: ❌</p> -->
                                         <div>
-                                            <button class="btn btn-dark" @click="addToChart(plate)">Add to Chart</button>
+                                            <button class="btn btn-dark" @click="addToChart(plate)">Add to Cart</button>
                                         </div>
 
                                     </div>

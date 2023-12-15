@@ -29,8 +29,8 @@ export default {
                                 <span class="visually-hidden">(current)</span></router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" active-class="active" to="/searching">Ricerca
-                                avanzata</router-link>
+                            <router-link class="nav-link" active-class="active" to="/searching">Advantage
+                                Searching</router-link>
                         </li>
                     </ul>
                 </div>
@@ -47,7 +47,7 @@ export default {
                                 </svg>
                             </router-link>
                         </li>
-                        <li class="nav-item ms-2"> <!-- Aggiunto margin-right per aggiungere spazio -->
+                        <li class="nav-item ms-4"> <!-- Aggiunto margin-right per aggiungere spazio -->
                             <a class="btn bg_my_dark-pink rounded-pill" href="http://127.0.0.1:8000/login">
                                 Login
                             </a>

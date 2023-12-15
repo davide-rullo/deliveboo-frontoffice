@@ -5,8 +5,8 @@ export default {
     data() {
         return {
             state,
-            cartItems: [],
-            cartPrice: null
+            /* cartItems: [],
+            cartPrice: null */
         }
 
     },
@@ -15,11 +15,24 @@ export default {
     },
 
     mounted() {
-        this.cartItems = JSON.parse(state.savedItems);
+        /* this.cartItems = JSON.parse(state.savedItems);
         this.cartPrice = JSON.parse(state.savedPrice);
         console.log(state.savedItems);
         console.log(this.cartItems);
-        console.log(this.cartPrice);
+        console.log(this.cartPrice); */
+
+        this.state.selected_items = JSON.parse(localStorage.getItem('selected_items'));
+
+        this.state.totalPrice = parseInt(JSON.parse(localStorage.getItem('totalPrice')));
+
+        /* this.cartPrice = JSON.parse(state.savedPrice); */
+
+        if (this.state.selected_items == null) {
+            this.state.selected_items = [];
+        }
+
+        console.log(this.state.selected_items, 'cart items');
+        /* this.state.selected_items = localStorage.getItem('selected_items'); */
     }
 }
 </script>
@@ -27,17 +40,21 @@ export default {
     <div class="bg_my_back">
         <h1 class="text-center pt-5">Your Cart</h1>
         <div class="container mt-5">
-            <div v-if="this.cartItems.length === 0">
+            <div v-if="this.state.selected_items == []">
                 <p class="text-center">Your Cart is empty</p>
             </div>
             <div class="container" v-else>
 
                 <div class="row row-cols-1 row-cols-sm-4 align-items-center justify-content-around py-2 item_card bg_custom mt-3"
                     v-for="
-        item in this.cartItems">
+        item in this.state.selected_items">
                     <div class="col d-flex align-items-center justify-content-center">
-                        <img :src=item.cover_image alt=""> <img src="../assets/img/img1.png" class="img-fluid" width=100px;
+
+                        <img style="max-height: 100;" v-if="item.cover_image != null"
+                            :src="state.base_url + 'storage/' + item.cover_image" class=" " alt="">
+                        <img style="max-height: 100;" v-else :src="state.base_url + `storage/covers/panino.jpg`" class=""
                             alt="">
+
                     </div>
                     <div class="col d-flex align-items-center justify-content-center">
                         <h4>{{ item.name }}</h4>
@@ -65,7 +82,7 @@ export default {
                         <h4>Total:</h4>
                     </div>
                     <div class="col  d-flex align-items-center justify-content-center">
-                        <h4>{{ state.savedPrice }} €</h4>
+                        <h4>{{ state.totalPrice }} €</h4>
                     </div>
                 </div>
             </div>

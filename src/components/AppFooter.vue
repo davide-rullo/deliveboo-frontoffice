@@ -8,8 +8,8 @@ export default {
         <div class="bg_my_orange rounded-top-5">
 
             <div class="container">
-                <div class="d-flex pt-5 justify-content-around">
-                    <div class="pt-4 px-4">
+                <div class="row row-cols-1-row-cols-sm-2 pt-5 ">
+                    <div class="col d-flex align-items-center pb-4 pt-4 px-4 flex-column">
                         <h3>Quick Links</h3>
                         <div>
 
@@ -78,7 +78,7 @@ export default {
                     </div>
 
 
-                    <div class=" pt-4 px-4">
+                    <div class="col d-flex align-items-center pt-4  px-4 flex-column">
                         <h3>Quick Links</h3>
                         <ul class="list-unstyled d-flex flex-column gap-3 pt-4">
                             <li class="d-flex align-items-center gap-2">

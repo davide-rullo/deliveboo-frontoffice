@@ -29,8 +29,8 @@ export default {
                                 <span class="visually-hidden">(current)</span></router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link class="nav-link" active-class="active" to="/searching">Advantage
-                                Searching</router-link>
+                            <router-link class="nav-link" active-class="active" to="/searching">Restaurants
+                                Search</router-link>
                         </li>
                     </ul>
                 </div>

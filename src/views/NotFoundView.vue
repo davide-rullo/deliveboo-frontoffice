@@ -18,7 +18,7 @@ export default {
         </div>
         <div class="button-redirect d-flex justify-content-center">
             <button class="btn btn-outline-dark my-3 " type="button">
-                <router-link :to="{ name: 'home' }">Go back to the Home Page</router-link></button>
+                <router-link :to="{ name: 'searching' }">Go back to the Restaurants Page</router-link></button>
         </div>
     </div>
 </template>

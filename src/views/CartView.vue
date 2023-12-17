@@ -1,5 +1,6 @@
 <script>
 import { state } from '../state.js';
+import axios from 'axios';
 export default {
     name: 'CartView',
     data() {
@@ -7,6 +8,12 @@ export default {
             state,
             /* cartItems: [],
             cartPrice: null */
+            loading: false,
+            customer_name: '',
+            customer_email: '',
+            customer_phone: '',
+            customer_address: '',
+            customer_message: '',
         }
 
     },
@@ -18,6 +25,27 @@ export default {
             state.saveTotalPrice();
             console.log(localStorage.getItem('selected_items'), 'LocalStorage Post svuotamento carrello');
             this.alert = false;
+        },
+
+        sendForm() {
+
+            const payload = {
+                customer_name: this.customer_name,
+                customer_email: this.customer_email,
+                customer_phone: this.customer_phone,
+                customer_address: this.customer_address,
+                customer_message: this.customer_message,
+            };
+            console.log(payload);
+
+            axios
+                .post(this.state.base_url + 'api/emails', payload)
+                .then(response => {
+                    console.log(response);
+                })
+                .catch(error => {
+                    console.error(error.message);
+                })
         }
     },
 
@@ -32,6 +60,7 @@ export default {
 
         this.state.totalPrice = parseInt(JSON.parse(localStorage.getItem('totalPrice')));
 
+        console.log(state.totalPrice);
         /* this.cartPrice = JSON.parse(state.savedPrice); */
 
         if (this.state.selected_items == null) {
@@ -53,8 +82,7 @@ export default {
             <div class="container" v-else>
 
                 <div class="row row-cols-1 row-cols-sm-4 align-items-center justify-content-around py-2 item_card bg_custom mt-3"
-                    v-for="
-        item in this.state.selected_items">
+                    v-for="item in this.state.selected_items">
                     <div class="col d-flex align-items-center justify-content-center">
 
                         <img style="max-height: 100;" v-if="item.cover_image != null"
@@ -92,23 +120,75 @@ export default {
                         <h4>{{ state.totalPrice }} €</h4>
                     </div>
                 </div>
-            </div>
-            <div class="row row-cols-1 row-cols-sm-4 pt-4 pb-4 justify-content-around">
-                <div class="col">
-                </div>
-                <div class="col">
-                </div>
-                <div class="col">
-                </div>
-                <div class="col  d-flex align-items-center justify-content-center">
-                    <button class="btn btn-primary">
-                        Go to checkout
+
+                <!-- Form -->
+                <form action="" @submit.prevent="sendForm()">
+                    <!-- name -->
+                    <div class="mb-3">
+                        <label for="customer_name" class="form-label">Name</label>
+                        <input type="text" class="form-control" name="customer_name" id="customer_name"
+                            aria-describedby="nameHelper" placeholder="Your Name" v-model="customer_name" />
+                        <small id="nameHelper" class="form-text text-muted">Type your name</small>
+                    </div>
+                    <!-- email -->
+                    <div class="mb-3">
+                        <label for="customer_email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="customer_email" id="customer_email"
+                            aria-describedby="emailHelper" placeholder="Your email" v-model="customer_email" />
+                        <small id="emailHelper" class="form-text text-muted">Type your email</small>
+                    </div>
+                    <!-- phone -->
+                    <div class="mb-3">
+                        <label for="customer_phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" name="customer_phone" id="customer_phone"
+                            aria-describedby="phoneHelper" placeholder="Your phone" v-model="customer_phone" />
+                        <small id="phoneHelper" class="form-text text-muted">Type your phone number</small>
+                    </div>
+                    <!-- address -->
+                    <div class="mb-3">
+                        <label for="customer_address" class="form-label">Address</label>
+                        <input type="text" class="form-control" name="customer_address" id="customer_address"
+                            aria-describedby="addressHelper" placeholder="Your address" v-model="customer_address" />
+                        <small id="addressHelper" class="form-text text-muted">Type your address</small>
+                    </div>
+                    <!-- message -->
+                    <div class="mb-3">
+                        <label for="customer_message" class="form-label">Message</label>
+
+                        <textarea name="customer_message" id="customer_message" rows="3" class="form-control"
+                            placeholder="Your message" v-model="customer_message"></textarea>
+                        <small id="messageHelper" class="form-text text-muted">Type your message</small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Send
                     </button>
-                    <button @click="clearCart()" type="button" class="btn btn-secondary ms-3">
-                        Clear Cart
-                    </button>
+
+
+
+                </form>
+
+
+
+                <div class="row row-cols-1 row-cols-sm-4 pt-4 pb-4 justify-content-around">
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    </div>
+                    <div class="col  d-flex align-items-center justify-content-center">
+                        <button class="btn btn-primary">
+                            Go to checkout
+                        </button>
+                        <button @click="clearCart()" type="button" class="btn btn-secondary ms-3">
+                            Clear Cart
+                        </button>
+                    </div>
                 </div>
+
             </div>
+
 
         </div>
     </div>

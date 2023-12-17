@@ -25,6 +25,13 @@ export default {
         }
     },
     methods: {
+
+        getPlateQuantity(plate) {
+        const selectedPlate = state.selected_items.find(item => item.id === plate.id);
+        return selectedPlate ? selectedPlate.quantity : 0;
+    },
+
+
         addToCart(item) {
 
             if (state.selected_items != [] && state.selected_items[0] !== undefined) {
@@ -223,7 +230,9 @@ export default {
                                             <h5 class="card-title">
                                                 {{ plate.name }}
 
-
+                                                <span v-if="getPlateQuantity(plate) > 0" class="badge bg-dark text-white me-2">
+                        {{ getPlateQuantity(plate) || 0 }}
+                    </span>
                                             </h5>
                                             <h5 class="card-text my_text_dark-pink">{{ plate.price }} €</h5>
                                         </div>

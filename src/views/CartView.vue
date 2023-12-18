@@ -18,6 +18,34 @@ export default {
 
     },
     methods: {
+        removeFromCart(item) {
+            const index = state.selected_items.findIndex(cartItem => cartItem.id === item.id);
+
+            if (index !== -1) {
+                const removedItem = state.selected_items[index];
+
+                // Verifica se la quantità è maggiore di 1 prima di decrementarla
+                if (removedItem.quantity > 1) {
+                    removedItem.quantity -= 1;
+                    removedItem.itemsTotalPrice = item.price * removedItem.quantity;
+                    state.totalPrice -= item.price;
+                } else {
+                    // Se la quantità è 1, rimuovi completamente l'articolo
+                    state.selected_items.splice(index, 1);
+                    state.totalPrice -= item.price;
+                }
+
+                state.saveItems();
+                state.saveTotalPrice();
+            }
+        },
+        calculateTotalPrice() {
+            let totalPrice = 0;
+            for (const item of this.state.selected_items) {
+                totalPrice += item.itemsTotalPrice;
+            }
+            return totalPrice.toFixed(2); // Formatta il totale con due decimali
+        },
         clearCart() {
             state.selected_items = [];
             state.saveItems();
@@ -150,7 +178,7 @@ export default {
                             </div>
                             <div class="col d-flex align-items-center justify-content-center">
                                 <div class="btn-group" role="group">
-                                    <button class="btn btn-outline-secondary">-</button>
+                                    <button class="btn btn-outline-secondary" @click="removeFromCart(item)">-</button>
                                     <button class="btn btn-outline-secondary">{{ item.quantity }}</button>
                                     <button class="btn btn-outline-secondary" @click="addToCart(item)">+</button>
                                 </div>
@@ -174,9 +202,14 @@ export default {
                             <div class="col  d-flex align-items-center justify-content-center">
                                 <h4>Total:</h4>
                             </div>
-                            <div class="col  d-flex align-items-center justify-content-center">
+                            <!-- <div class="col  d-flex align-items-center justify-content-center">
                                 <h4>{{ state.totalPrice }} €</h4>
+                            </div> -->
+
+                            <div class="col  d-flex align-items-center justify-content-center">
+                                <h4>{{ calculateTotalPrice() }} €</h4>
                             </div>
+
                         </div>
                     </div>
                     <div class="col">

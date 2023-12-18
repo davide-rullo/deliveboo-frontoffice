@@ -81,6 +81,7 @@ export default {
 
         },
 
+
         clearCart() {
             state.selected_items = [];
             state.saveItems();
@@ -94,7 +95,25 @@ export default {
             this.alert = false;
         },
 
+
+        removeFromCart(item) {
+            const index = state.selected_items.findIndex(cartItem => cartItem.id === item.id);
+
+            if (index !== -1) {
+                const removedItem = state.selected_items.splice(index, 1)[0];
+                state.totalPrice -= removedItem.itemsTotalPrice;
+                state.saveItems();
+                state.saveTotalPrice();
+            }
+        },
+
+        
+       
+        
     },
+
+
+    
     mounted() {
 
         const url = this.base_url + this.restaurant_api + this.$route.params.slug;
@@ -230,9 +249,9 @@ export default {
                                             <h5 class="card-title">
                                                 {{ plate.name }}
 
-                                                <span v-if="getPlateQuantity(plate) > 0" class="badge bg-dark text-white me-2">
-                        {{ getPlateQuantity(plate) || 0 }}
-                    </span>
+                                               
+
+                   
                                             </h5>
                                             <h5 class="card-text my_text_dark-pink">{{ plate.price }} €</h5>
                                         </div>
@@ -248,9 +267,15 @@ export default {
 
                                         <!-- <p v-if="(plate.is_available === 1)" class="card-text">Available: ✅</p>
                                         <p v-else>Available: ❌</p> -->
-                                        <div>
+
+                                        <div class="btn-group" role="group">
+                            <button class="btn btn-outline-secondary" @click="removeFromCart(item)">-</button>
+                            <button class="btn btn-outline-secondary">{{ getPlateQuantity(plate) }}</button>
+                            <button class="btn btn-outline-secondary" @click="addToCart(plate)">+</button>
+                        </div>
+                                        <!-- <div>
                                             <button class="btn btn-dark" @click="addToCart(plate)">Add to Cart</button>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                 </div>

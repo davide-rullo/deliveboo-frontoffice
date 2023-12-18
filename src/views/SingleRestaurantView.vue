@@ -26,10 +26,23 @@ export default {
     },
     methods: {
 
+        removeFromCart(item) {
+            const index = state.selected_items.findIndex(cartItem => cartItem.id === item.id);
+
+            if (index !== -1) {
+                const removedItem = state.selected_items.splice(index, 1)[0];
+                state.totalPrice -= removedItem.itemsTotalPrice;
+                state.saveItems();
+                state.saveTotalPrice();
+            }
+        },
+
+
+
         getPlateQuantity(plate) {
-        const selectedPlate = state.selected_items.find(item => item.id === plate.id);
-        return selectedPlate ? selectedPlate.quantity : 0;
-    },
+            const selectedPlate = state.selected_items.find(item => item.id === plate.id);
+            return selectedPlate ? selectedPlate.quantity : 0;
+        },
 
 
         addToCart(item) {
@@ -107,13 +120,13 @@ export default {
             }
         },
 
-        
-       
-        
+
+
+
     },
 
 
-    
+
     mounted() {
 
         const url = this.base_url + this.restaurant_api + this.$route.params.slug;
@@ -169,6 +182,7 @@ export default {
         <!-- <h1 class="p-5 mb-4 jumbo shadow rounded-bottom-5"> Restaurant: <span class="fw-bold">{{ restaurant.name }}</span>
         </h1> -->
         <div class="container">
+
             <button class="btn btn-outline-dark my-3" type="button">
                 <router-link class="nav-link" to="/searching">
                     Back to restaurants
@@ -249,9 +263,9 @@ export default {
                                             <h5 class="card-title">
                                                 {{ plate.name }}
 
-                                               
 
-                   
+
+
                                             </h5>
                                             <h5 class="card-text my_text_dark-pink">{{ plate.price }} €</h5>
                                         </div>
@@ -269,20 +283,31 @@ export default {
                                         <p v-else>Available: ❌</p> -->
 
                                         <div class="btn-group" role="group">
-                            <button class="btn btn-outline-secondary" @click="removeFromCart(item)">-</button>
-                            <button class="btn btn-outline-secondary">{{ getPlateQuantity(plate) }}</button>
-                            <button class="btn btn-outline-secondary" @click="addToCart(plate)">+</button>
-                        </div>
+                                            <button class="btn btn-outline-secondary"
+                                                @click="removeFromCart(plate)">-</button>
+
+                                            <button class="btn btn-outline-secondary">{{ getPlateQuantity(plate) }}</button>
+                                            <button class="btn btn-outline-secondary" @click="addToCart(plate)">+</button>
+                                        </div>
                                         <!-- <div>
                                             <button class="btn btn-dark" @click="addToCart(plate)">Add to Cart</button>
                                         </div> -->
 
+                                        <router-link to="/cart" class="ms-2 text-decoration-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#eb585b"
+                                                class="bi bi-cart2" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5M3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0m9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0" />
+                                            </svg>
+                                        </router-link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
 
                 <!-- Modal Body -->
                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
@@ -314,14 +339,13 @@ export default {
 
 
 
-
             <div class="d-flex gap-2 align-items-center" v-else>
                 <Loader></Loader>
             </div>
 
-
-
         </div>
+
+
 
     </div>
 </template>

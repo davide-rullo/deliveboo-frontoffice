@@ -32,6 +32,10 @@ export default {
                             <router-link class="nav-link" active-class="active" to="/searching">Restaurants
                                 Search</router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link class="nav-link" active-class="active" to="/about">About us</router-link>
+                        </li>
+                        
                     </ul>
                 </div>
 

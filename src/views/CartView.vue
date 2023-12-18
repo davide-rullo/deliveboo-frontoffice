@@ -83,10 +83,11 @@ export default {
 
                 <div class="row row-cols-1 row-cols-sm-4 align-items-center justify-content-around py-2 item_card bg_custom mt-3"
                     v-for="item in this.state.selected_items">
+
                     <div class="col d-flex align-items-center justify-content-center">
 
                         <img style="max-height: 100;" v-if="item.cover_image != null"
-                            :src="state.base_url + 'storage/' + item.cover_image" class=" " alt="">
+                            :src="state.base_url + 'storage/' + item.cover_image" class=" img-fluid " alt="">
                         <img style="max-height: 100;" v-else :src="state.base_url + `storage/covers/panino.jpg`" class=""
                             alt="">
 
@@ -111,7 +112,12 @@ export default {
                     class="row row-cols-1 row-cols-sm-4  align-items-center justify-content-around border-top   py-2 item_card bg_custom mt-3">
                     <div class="col">
                     </div>
-                    <div class="col">
+                    <div class="col d-flex align-items-center justify-content-center">
+
+                        <button @click="clearCart()" type="button" class="btn btn-secondary ms-3">
+                            Clear Cart
+                        </button>
+
                     </div>
                     <div class="col  d-flex align-items-center justify-content-center">
                         <h4>Total:</h4>
@@ -177,13 +183,11 @@ export default {
                     </div>
                     <div class="col">
                     </div>
-                    <div class="col  d-flex align-items-center justify-content-center">
+                    <div class="col d-flex  justify-content-end">
                         <button class="btn btn-primary">
                             Go to checkout
                         </button>
-                        <button @click="clearCart()" type="button" class="btn btn-secondary ms-3">
-                            Clear Cart
-                        </button>
+
                     </div>
                 </div>
 

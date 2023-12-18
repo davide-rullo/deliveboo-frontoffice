@@ -27,6 +27,57 @@ export default {
             this.alert = false;
         },
 
+        addToCart(item) {
+
+if (state.selected_items != [] && state.selected_items[0] !== undefined) {
+    /*  console.log(state.selected_items[0], 'carr undefined'); */
+    console.log(state.selected_items[0]);
+    if (state.selected_items[0].restaurant_id !== item.restaurant_id) {
+        console.log(state.selected_items[0].restaurant_id, 'id_restaurant');
+        this.alert = true;
+        /* console.log(this.alert, 'addToCart'); */
+        return;
+    }
+}
+
+
+const existItem = state.selected_items.find(
+    (selectedPlate) => selectedPlate.id === item.id);
+console.log(existItem);
+
+if (existItem) {
+    existItem.quantity += 1;
+    existItem.itemsTotalPrice = item.price * existItem.quantity;
+    state.totalPrice = item.price * existItem.quantity;
+} else {
+    state.selected_items.push(item);
+    item['quantity'] = 1;
+    item['itemsTotalPrice'] = item.price * item.quantity;
+
+    state.totalPrice += item.price;
+}
+
+state.saveItems();
+state.saveTotalPrice();
+
+console.log(state.selected_items, 'carrello');
+
+
+
+
+
+
+
+
+/* state.selected_items.push(item);
+localStorage.setItem('selected_items', JSON.stringify(state.selected_items));
+console.log(state.selected_items, "selected_items all'aggiunta di un oggetto dal localStorage");
+console.log(localStorage.getItem('selected_items'), "localStorage all aggiunta di un oggetto"); */
+
+},
+
+       
+
         sendForm() {
 
             const payload = {
@@ -96,9 +147,9 @@ export default {
                     </div>
                     <div class="col d-flex align-items-center justify-content-center">
                         <div class="btn-group" role="group">
-                            <button class="btn btn-outline-secondary">-</button>
+                            <button class="btn btn-outline-secondary" >-</button>
                             <button class="btn btn-outline-secondary">{{ item.quantity }}</button>
-                            <button class="btn btn-outline-secondary">+</button>
+                            <button class="btn btn-outline-secondary" @click="addToCart(item)">+</button>
                         </div>
                     </div>
                     <div class="col d-flex align-items-center justify-content-center">

@@ -95,6 +95,18 @@ export default {
             this.alert = false;
         },
 
+
+        removeFromCart(item) {
+            const index = state.selected_items.findIndex(cartItem => cartItem.id === item.id);
+
+            if (index !== -1) {
+                const removedItem = state.selected_items.splice(index, 1)[0];
+                state.totalPrice -= removedItem.itemsTotalPrice;
+                state.saveItems();
+                state.saveTotalPrice();
+            }
+        },
+
         
        
         
@@ -257,7 +269,7 @@ export default {
                                         <p v-else>Available: ❌</p> -->
 
                                         <div class="btn-group" role="group">
-                            <button class="btn btn-outline-secondary">-</button>
+                            <button class="btn btn-outline-secondary" @click="removeFromCart(item)">-</button>
                             <button class="btn btn-outline-secondary">{{ getPlateQuantity(plate) }}</button>
                             <button class="btn btn-outline-secondary" @click="addToCart(plate)">+</button>
                         </div>

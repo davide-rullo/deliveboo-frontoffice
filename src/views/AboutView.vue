@@ -53,7 +53,7 @@ export default {
 
                         <h2>Our Commitment to You</h2>
                         <p>
-                            At Deliveboo, we're not just a food delivery service – we're your culinary companions on a gastronomic adventure. From our user-friendly platform to prompt delivery and a curated selection of top-notch restaurants, we're committed to making your experience seamless and enjoyable. Join the [Your Company Name] family, where great food is just a click away. Thanks for choosing us to be part of your dining journey!
+                            At Deliveboo, we're not just a food delivery service – we're your culinary companions on a gastronomic adventure. From our user-friendly platform to prompt delivery and a curated selection of top-notch restaurants, we're committed to making your experience seamless and enjoyable. Join the Deliveboo family, where great food is just a click away. Thanks for choosing us to be part of your dining journey!
                         </p>
                     </div>
                 </div>

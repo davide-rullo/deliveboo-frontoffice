@@ -26,6 +26,8 @@ export default {
 
         this.state.totalPrice = parseInt(JSON.parse(localStorage.getItem('totalPrice')));
 
+        console.log(this.calculateTotalPrice());
+
         if (this.state.selected_items == null) {
             this.state.selected_items = [];
         }
@@ -50,6 +52,13 @@ export default {
     },
 
     methods: {
+        calculateTotalPrice() {
+            let totalPrice = 0;
+            for (const item of this.state.selected_items) {
+                totalPrice += item.itemsTotalPrice;
+            }
+            return totalPrice.toFixed(2); // Formatta il totale con due decimali
+        },
         prepareNonce() {
             this.braintreeInstance.requestPaymentMethod((err, payload) => {
                 document.getElementById('nonce').value = payload.nonce;
@@ -65,7 +74,7 @@ export default {
 
         preparePaymentData() {
             this.paymentData = {
-                amount: state.totalPrice,
+                amount: this.calculateTotalPrice(),
                 nonce: this.nonce,
             }
             this.order = {
@@ -74,7 +83,7 @@ export default {
                 customer_phone: this.customer_phone,
                 customer_address: this.customer_address,
                 customer_message: this.customer_message,
-                tot_price: state.totalPrice,
+                tot_price: this.calculateTotalPrice(),
                 restaurant_id: state.selected_items[0].restaurant_id,
                 items: state.selected_items,
             }
@@ -132,13 +141,19 @@ export default {
                                 .post(this.state.base_url + 'api/emails', emailDetails)
                                 .then(response => {
                                     console.log(response);
+                                    this.$router.push('/order-success');
+                                    state.clearCart();
                                 })
                                 .catch(error => {
                                     console.error(error.message);
+                                    this.$router.push('/order-fail');
                                 })
                         })
                     })
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                        console.log(error)
+                        this.$router.push('/order-fail');
+                    });
             })
         },
     }
@@ -147,6 +162,11 @@ export default {
 </script>
 <template>
     <div class="container">
+        <div class="button-redirect d-flex justify-content-center">
+            <button class="btn btn-outline-dark my-3 " type="button">
+                <router-link :to="{ name: 'Cart' }">Back to Your Cart</router-link>
+            </button>
+        </div>
         <form id="payment-form">
             <div id="dropin-container"></div>
             <input type="submit" @click="prepareNonce()" />

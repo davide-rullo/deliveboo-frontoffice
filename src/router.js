@@ -8,6 +8,8 @@ import SingleRestaurantView from "./views/SingleRestaurantView.vue";
 import NotFoundView from "./views/NotFoundView.vue";
 import CartView from "./views/CartView.vue";
 import CheckoutView from "./views/CheckoutView.vue";
+import OrderSuccessView from "./views/OrderSuccessView.vue";
+import OrderFailView from "./views/OrderFailView.vue";
 
 
 const routes = [
@@ -50,6 +52,16 @@ const routes = [
         path: '/checkout',
         name: 'Checkout',
         component: CheckoutView
+    },
+    {
+        path: '/order-success',
+        name: 'OrderSuccess',
+        component: OrderSuccessView
+    },
+    {
+        path: '/order-fail',
+        name: 'OrderFail',
+        component: OrderFailView
     }
 ];
 

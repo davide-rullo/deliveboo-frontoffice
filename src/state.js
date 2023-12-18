@@ -20,6 +20,15 @@ export const state = reactive({
         localStorage.setItem('totalPrice', JSON.stringify(this.totalPrice));
     },
 
+    clearCart() {
+        state.selected_items = [];
+        state.saveItems();
+        state.totalPrice = 0;
+        state.saveTotalPrice();
+        console.log(localStorage.getItem('selected_items'), 'LocalStorage Post svuotamento carrello');
+        this.alert = false;
+    },
+
 
 })
 

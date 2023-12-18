@@ -106,7 +106,7 @@ export default {
 
 
 
-        sendForm() {
+        /* sendForm() {
 
             const payload = {
                 customer_name: this.customer_name,
@@ -125,7 +125,7 @@ export default {
                 .catch(error => {
                     console.error(error.message);
                 })
-        }
+        } */
     },
 
     mounted() {
@@ -160,7 +160,7 @@ export default {
             </div>
             <div class="container" v-else>
 
-                <div class="row row-cols-1 row-cols-md-2">
+                <div class="row row-cols-1">
                     <div class="col">
                         <div class="row row-cols-1 row-cols-sm-4 align-items-center justify-content-around py-2 item_card bg_custom mt-3"
                             v-for="item in this.state.selected_items">
@@ -214,53 +214,7 @@ export default {
                     </div>
                     <div class="col">
 
-                        <!-- Form -->
-                        <form action="" @submit.prevent="sendForm()">
-                            <!-- name -->
-                            <div class="mb-3">
-                                <label for="customer_name" class="form-label">Name</label>
-                                <input type="text" class="form-control" name="customer_name" id="customer_name"
-                                    aria-describedby="nameHelper" placeholder="Your Name" v-model="customer_name" />
-                                <small id="nameHelper" class="form-text text-muted">Type your name</small>
-                            </div>
-                            <!-- email -->
-                            <div class="mb-3">
-                                <label for="customer_email" class="form-label">Email</label>
-                                <input type="email" class="form-control" name="customer_email" id="customer_email"
-                                    aria-describedby="emailHelper" placeholder="Your email" v-model="customer_email" />
-                                <small id="emailHelper" class="form-text text-muted">Type your email</small>
-                            </div>
-                            <!-- phone -->
-                            <div class="mb-3">
-                                <label for="customer_phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" name="customer_phone" id="customer_phone"
-                                    aria-describedby="phoneHelper" placeholder="Your phone" v-model="customer_phone" />
-                                <small id="phoneHelper" class="form-text text-muted">Type your phone number</small>
-                            </div>
-                            <!-- address -->
-                            <div class="mb-3">
-                                <label for="customer_address" class="form-label">Address</label>
-                                <input type="text" class="form-control" name="customer_address" id="customer_address"
-                                    aria-describedby="addressHelper" placeholder="Your address"
-                                    v-model="customer_address" />
-                                <small id="addressHelper" class="form-text text-muted">Type your address</small>
-                            </div>
-                            <!-- message -->
-                            <div class="mb-3">
-                                <label for="customer_message" class="form-label">Message</label>
 
-                                <textarea name="customer_message" id="customer_message" rows="3" class="form-control"
-                                    placeholder="Your message" v-model="customer_message"></textarea>
-                                <small id="messageHelper" class="form-text text-muted">Type your message</small>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary">
-                                Send
-                            </button>
-
-
-
-                        </form>
 
                     </div>
                 </div>
@@ -269,16 +223,11 @@ export default {
 
 
 
-                <div class="row row-cols-1 row-cols-sm-4 pt-4 pb-4 justify-content-around">
-                    <div class="col">
-                    </div>
-                    <div class="col">
-                    </div>
-                    <div class="col">
-                    </div>
+                <div class="row pt-4 pb-4 justify-content-end">
+
                     <div class="col d-flex  justify-content-end">
-                        <button class="btn btn-primary">
-                            Go to checkout
+                        <button class="btn btn-outline-dark my-3 " type="button">
+                            <router-link :to="{ name: 'Checkout' }">Go to Checkout</router-link>
                         </button>
 
                     </div>

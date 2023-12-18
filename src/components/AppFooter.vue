@@ -5,7 +5,7 @@ export default {
 </script>
 <template>
     <footer class="bg_my_back">
-        <div class="bg_my_orange rounded-top-5">
+        <div class="bg_my_orange">
 
             <div class="container">
                 <div class="row row-cols-1-row-cols-sm-2 pt-5 ">

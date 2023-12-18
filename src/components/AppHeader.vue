@@ -51,7 +51,7 @@ export default {
                                 </svg>
                             </router-link>
                         </li>
-                        <li class="nav-item ms-4"> <!-- Aggiunto margin-right per aggiungere spazio -->
+                        <li class="nav-item ms-md-4 pt-2 pt-md-0"> <!-- Aggiunto margin-right per aggiungere spazio -->
                             <a class="btn bg_my_dark-pink rounded-pill" href="http://127.0.0.1:8000/login">
                                 Login
                             </a>

@@ -73,12 +73,13 @@ export default {
                 customer_email: this.customer_email,
                 customer_phone: this.customer_phone,
                 customer_address: this.customer_address,
+                customer_message: this.customer_message,
                 tot_price: state.totalPrice,
                 restaurant_id: state.selected_items[0].restaurant_id,
-                //items: state.selected_items,
+                items: state.selected_items,
             }
 
-            console.log(this.paymentData, this.order, 'dati pronti');
+            console.log(this.paymentData.amount, this.order, 'dati pronti');
         },
 
         makePayment() {
@@ -93,6 +94,7 @@ export default {
                 customer_email: this.customer_email,
                 customer_phone: this.customer_phone,
                 customer_address: this.customer_address,
+                customer_message: this.customer_message
             };
             console.log(emailDetails);
 
@@ -111,24 +113,30 @@ export default {
                     console.error(err);
                     return;
                 }
-
-
                 /* Chiamata post per effettuare il pagamento */
+                console.log(this.paymentData, "Siamo a prima della chiamata");
                 axios.post(this.makePaymentUrl, {
                     paymentData: this.paymentData,
-                    order: this.order,
                 })
-                    /* Se va a buon fine , effettuo la chiamata alla mail */
-                    .then((response) => {
-                        axios
-                            .post(this.state.base_url + 'api/emails', emailDetails)
-                            .then(response => {
-                                console.log(response);
-                            })
-                            .catch(error => {
-                                console.error(error.message);
-                            })
 
+                    // Se va a buon fine , effettuo la chiamata agli ordini 
+                    .then((response) => {
+                        console.log(this.order);
+                        axios.post('http://127.0.0.1:8000/api/orders/new', {
+                            orderDetail: this.order
+                        }).then((response) =>
+                        // Se va a buon fine , effettuo la chiamata alla mail 
+                        {
+                            console.log(emailDetails, " Dettagli Mail");
+                            axios
+                                .post(this.state.base_url + 'api/emails', emailDetails)
+                                .then(response => {
+                                    console.log(response);
+                                })
+                                .catch(error => {
+                                    console.error(error.message);
+                                })
+                        })
                     })
                     .catch((error) => console.log(error));
             })
@@ -173,6 +181,13 @@ export default {
                 <input type="text" class="form-control" name="customer_address" id="customer_address"
                     aria-describedby="addressHelper" placeholder="Your address" v-model="customer_address" />
                 <small id="addressHelper" class="form-text text-muted">Type your address</small>
+            </div>
+            <div class="mb-3">
+                <label for="customer_message" class="form-label">Message</label>
+
+                <textarea name="customer_message" id="customer_message" rows="3" class="form-control"
+                    placeholder="Your message" v-model="customer_message"></textarea>
+                <small id="messageHelper" class="form-text text-muted">Type your message</small>
             </div>
         </form>
         <button id="submit-button" class="button button--small button--green mb-5" @click="makePayment()">Purchase</button>

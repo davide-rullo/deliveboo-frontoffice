@@ -23,7 +23,7 @@ export default {
             state.saveItems();
             state.totalPrice = 0;
             state.saveTotalPrice();
-
+            console.log(localStorage.getItem('selected_items'), 'LocalStorage Post svuotamento carrello');
             this.alert = false;
         },
 

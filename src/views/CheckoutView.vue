@@ -17,6 +17,7 @@ export default {
             customer_phone: '',
             customer_address: '',
             customer_message: '',
+
         }
     },
 
@@ -34,28 +35,38 @@ export default {
 
         axios.get(this.getTokenUrl)
             .then((response) => {
-                console.log(response.data.token);
                 this.tokenPayment = response.data.token;
                 braintree.dropin.create({
                     authorization: this.tokenPayment,
                     selector: '#dropin-container'
-                }, (err, instance) => {  // Questa parentesi graffa dovrebbe essere qui
+                }, (err, instance) => {
                     if (err) {
                         console.error(err);
                         return;
                     }
                     this.braintreeInstance = instance;
-                    console.log(this.tokenPayment);
-                    //console.log(this.braintreeInstance);
                 });
             })
     },
 
     methods: {
+        prepareNonce() {
+            this.braintreeInstance.requestPaymentMethod((err, payload) => {
+                document.getElementById('nonce').value = payload.nonce;
+                this.nonce = payload.nonce;
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                console.log("Nonce pronta");
+                console.log(this.nonce);
+            })
+        },
+
         preparePaymentData() {
             this.paymentData = {
-                token: "fake-valid-nonce",
                 amount: state.totalPrice,
+                nonce: this.nonce,
             }
             this.order = {
                 customer_name: this.customer_name,
@@ -91,13 +102,16 @@ export default {
 
             this.preparePaymentData();
 
+            console.log(this.paymentData);
+
             /* Metodo che braintree utilizza per richiedere il pagamento */
             this.braintreeInstance.requestPaymentMethod((err, payload) => {
+                console.log(payload.nonce);
                 if (err) {
                     console.error(err);
                     return;
                 }
-                this.paymentData.nonce = payload.nonce;
+
 
                 /* Chiamata post per effettuare il pagamento */
                 axios.post(this.makePaymentUrl, {
@@ -119,41 +133,17 @@ export default {
                     .catch((error) => console.log(error));
             })
         },
-
-        checkToken() {
-            function isValidBase64(str) {
-                if (!str) {
-                    return false;
-                }
-                const base64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-                for (let i = 0; i < str.length; i++) {
-                    if (!base64chars.includes(str[i])) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            let token = this.tokenPayment;
-            if (!token) {
-                console.log('tokenPayment is undefined');
-                return;
-            }
-            let parts = token.split(".");
-            if (parts.length < 2) {
-                console.log('token does not have two parts');
-                return;
-            }
-            let isValid = isValidBase64(parts[1]);
-            console.log(isValid);
-        }
     }
 }
 
 </script>
 <template>
     <div class="container">
-        <div id="dropin-container"></div>
+        <form id="payment-form">
+            <div id="dropin-container"></div>
+            <input type="submit" @click="prepareNonce()" />
+            <input type="hidden" id="nonce" name="payment_method_nonce" />
+        </form>
         <!-- Form -->
         <form action="" class=" mt-5">
             <!-- name -->

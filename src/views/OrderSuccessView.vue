@@ -6,13 +6,14 @@ export default {
 </script>
         
 <template>
+       <div class="bg_my_back space"></div>
     <div class="bg_my_back wrap">
 
         <div class="container d-flex flex-column  align-items-center nfcont">
             <div class="not-found d-flex flex-column justify-content-center text-center">
-                <h2 class="py-5 my_text_dark-pink">Super!!! Your order is on the way</h2>
-                <p class="my_text_dark-pink">Make yourself comfortable and in no time</p>
-                <p class="my_text_dark-pink">Your Booster the Rooster will reach
+                <h2 class=" ">Super!!! Your order is on the way</h2>
+                <p class="">Make yourself comfortable and in no time</p>
+                <p class="">Your Booster the Rooster will reach
                     you!</p>
 
 
@@ -38,5 +39,8 @@ export default {
     background-color: rgba(255, 173, 173, 0.2823529412);
     background-repeat: no-repeat;
     background-position: center;
+}
+.space{
+    height: 2rem;
 }
 </style>

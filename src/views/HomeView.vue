@@ -56,7 +56,7 @@ export default {
 <template>
     <div class="bg_my_orange  ">
         <div class="p-5 jumbotron shadow jumbo_img ">
-            <div class="container py-5">
+            <div class="container  add-pb">
 
 
                 <div class="row ">
@@ -107,7 +107,7 @@ export default {
                         <img class="img-fluid position-relative z-2" width="200px" src="../assets/img/mockupdeliv2.png"
                             alt="">
                     </div>
-                    <div class="col-12 col-md-8 text-center d-flex flex-column justify-content-center">
+                    <div class="col-12 col-md-8 text-center d-flex flex-column justify-content-center pb-4">
 
                         <div class="row row-cols-1 row-cols-xl-2  p-3 justify-content-center">
                             <div class="col ">
@@ -248,5 +248,9 @@ export default {
 
 .waves-inside {
     margin: -1rem auto;
+}
+
+.add-pb{
+    padding-bottom: 5rem;
 }
 </style>

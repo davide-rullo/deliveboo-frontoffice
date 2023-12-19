@@ -253,4 +253,10 @@ export default {
 .add-pb{
     padding-bottom: 5rem;
 }
+
+@media (max-width: 992px) {
+    .jumbo_img {
+        background-image: none;
+    }
+}
 </style>

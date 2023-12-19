@@ -1,8 +1,12 @@
 <script>
 import axios from 'axios';
 import { state } from '../state';
+import Loader from '../components/Loader.vue';
 export default {
     name: 'CheckoutView',
+    components: {
+        Loader,
+    },
     data() {
         return {
             state,
@@ -17,6 +21,7 @@ export default {
             customer_phone: '',
             customer_address: '',
             customer_message: '',
+            loading: false,
 
         }
     },
@@ -64,6 +69,9 @@ export default {
     },
 
     methods: {
+        startLoading() {
+            this.loading = true;
+        },
         calculateTotalPrice() {
             let totalPrice = 0;
             for (const item of this.state.selected_items) {
@@ -173,59 +181,67 @@ export default {
 
 </script>
 <template>
-    <div class="container">
-        <div class="button-redirect d-flex justify-content-center">
-            <button class="btn btn-outline-dark my-3 " type="button">
-                <router-link :to="{ name: 'Cart' }">Back to Your Cart</router-link>
-            </button>
+    <div v-if="!loading">
+        <div class="container">
+            <div class="button-redirect d-flex justify-content-center">
+                <button class="btn btn-outline-dark my-3 " type="button">
+                    <router-link :to="{ name: 'Cart' }">Back to Your Cart</router-link>
+                </button>
+            </div>
+            <form id="payment-form">
+                <div id="dropin-container"></div>
+                <input type="submit" @click="prepareNonce()" />
+                <input type="hidden" id="nonce" name="payment_method_nonce" />
+            </form>
+            <!-- Form -->
+            <form action="" class=" mt-5">
+                <!-- name -->
+                <div class="mb-3">
+                    <label for="customer_name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="customer_name" id="customer_name"
+                        aria-describedby="nameHelper" placeholder="Your Name" v-model="customer_name" />
+                    <!-- <small id="nameHelper" class="form-text text-muted">Type your name</small> -->
+                </div>
+                <!-- email -->
+                <div class="mb-3">
+                    <label for="customer_email" class="form-label">Email</label>
+                    <input type="email" class="form-control" name="customer_email" id="customer_email"
+                        aria-describedby="emailHelper" placeholder="Your email" v-model="customer_email" />
+                    <!-- <small id="emailHelper" class="form-text text-muted">Type your email</small> -->
+                </div>
+                <!-- phone -->
+                <div class="mb-3">
+                    <label for="customer_phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" name="customer_phone" id="customer_phone"
+                        aria-describedby="phoneHelper" placeholder="Your phone" v-model="customer_phone" />
+                    <!-- <small id="phoneHelper" class="form-text text-muted">Type your phone number</small> -->
+                </div>
+                <!-- address -->
+                <div class="mb-3">
+                    <label for="customer_address" class="form-label">Address</label>
+                    <input type="text" class="form-control" name="customer_address" id="customer_address"
+                        aria-describedby="addressHelper" placeholder="Your address" v-model="customer_address" />
+                    <!-- <small id="addressHelper" class="form-text text-muted">Type your address</small> -->
+                </div>
+                <div class="mb-3">
+                    <label for="customer_message" class="form-label">Message</label>
+
+                    <textarea name="customer_message" id="customer_message" rows="3" class="form-control"
+                        placeholder="Your message" v-model="customer_message"></textarea>
+                    <!-- <small id="messageHelper" class="form-text text-muted">Type your message</small> -->
+                </div>
+            </form>
+
+            <button v-if="isFormValid" id="submit-button" class="button button--small button--green mb-5"
+                @click="this.makePayment(); this.startLoading();">Purchase</button>
+
+
+
         </div>
-        <form id="payment-form">
-            <div id="dropin-container"></div>
-            <input type="submit" @click="prepareNonce()" />
-            <input type="hidden" id="nonce" name="payment_method_nonce" />
-        </form>
-        <!-- Form -->
-        <form action="" class=" mt-5">
-            <!-- name -->
-            <div class="mb-3">
-                <label for="customer_name" class="form-label">Name</label>
-                <input type="text" class="form-control" name="customer_name" id="customer_name"
-                    aria-describedby="nameHelper" placeholder="Your Name" v-model="customer_name" />
-                <small id="nameHelper" class="form-text text-muted">Type your name</small>
-            </div>
-            <!-- email -->
-            <div class="mb-3">
-                <label for="customer_email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="customer_email" id="customer_email"
-                    aria-describedby="emailHelper" placeholder="Your email" v-model="customer_email" />
-                <small id="emailHelper" class="form-text text-muted">Type your email</small>
-            </div>
-            <!-- phone -->
-            <div class="mb-3">
-                <label for="customer_phone" class="form-label">Phone</label>
-                <input type="text" class="form-control" name="customer_phone" id="customer_phone"
-                    aria-describedby="phoneHelper" placeholder="Your phone" v-model="customer_phone" />
-                <small id="phoneHelper" class="form-text text-muted">Type your phone number</small>
-            </div>
-            <!-- address -->
-            <div class="mb-3">
-                <label for="customer_address" class="form-label">Address</label>
-                <input type="text" class="form-control" name="customer_address" id="customer_address"
-                    aria-describedby="addressHelper" placeholder="Your address" v-model="customer_address" />
-                <small id="addressHelper" class="form-text text-muted">Type your address</small>
-            </div>
-            <div class="mb-3">
-                <label for="customer_message" class="form-label">Message</label>
+    </div>
 
-                <textarea name="customer_message" id="customer_message" rows="3" class="form-control"
-                    placeholder="Your message" v-model="customer_message"></textarea>
-                <small id="messageHelper" class="form-text text-muted">Type your message</small>
-            </div>
-        </form>
-        <button v-if="isFormValid" id="submit-button" class="button button--small button--green mb-5"
-            @click="makePayment()">Purchase</button>
-
-
+    <div v-else class="container d-flex gap-2 align-items-center">
+        <Loader></Loader>
     </div>
 </template>
 
@@ -261,5 +277,62 @@ export default {
 .button--green:hover {
     background-color: #8bdda8;
     color: white;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    animation: rotate 1s linear infinite
+}
+
+.loader::before,
+.loader::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    inset: 0px;
+    border-radius: 50%;
+    border: 5px solid #FFF;
+    animation: prixClipFix 2s linear infinite;
+}
+
+.loader::after {
+    border-color: #FF3D00;
+    animation: prixClipFix 2s linear infinite, rotate 0.5s linear infinite reverse;
+    inset: 6px;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes prixClipFix {
+    0% {
+        clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0)
+    }
+
+    25% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0)
+    }
+
+    50% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
+    }
+
+    75% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%)
+    }
+
+    100% {
+        clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
+    }
 }
 </style>

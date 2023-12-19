@@ -6,7 +6,7 @@ export default {
 </script>
         
 <template>
-       <div class="bg_my_back space"></div>
+    <div class="bg_my_back space"></div>
     <div class="bg_my_back wrap">
 
         <div class="container d-flex flex-column  align-items-center nfcont">
@@ -34,13 +34,14 @@ export default {
 }
 
 .wrap {
-    background: url('../assets/img/notfoundimgnobg.png');
+    background: url('../assets/img/order-success.png');
     background-size: contain;
     background-color: rgba(255, 173, 173, 0.2823529412);
     background-repeat: no-repeat;
     background-position: center;
 }
-.space{
+
+.space {
     height: 2rem;
 }
 </style>

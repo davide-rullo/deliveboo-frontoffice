@@ -6,12 +6,13 @@ export default {
 </script>
         
 <template>
+    <div class="bg_my_back space"></div>
     <div class="bg_my_back wrap">
 
         <div class="container d-flex flex-column  align-items-center nfcont">
             <div class="not-found d-flex flex-column">
-                <h2 class="text-center py-5 my_text_dark-pink">Ops!!! Something is gone wrong</h2>
-                <p class="my_text_dark-pink">Please double check your details and retry the payment.!</p>
+                <h2 class="text-center">Ops! Something is gone wrong</h2>
+                <p class="">Please double check your details and retry the payment.</p>
 
 
             </div>
@@ -26,6 +27,10 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.space{
+    height: 2rem;
+}
 .nfcont {
     height: 80vh;
 }

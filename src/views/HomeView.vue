@@ -70,8 +70,8 @@ export default {
                             #DeliveBooMagic"
                         </p>
                     </div>
-                    <div class="col-lg-2">
-                        <img class="img-fluid booster" src="../assets/img/pollo.png" alt="">
+                    <div class="col-lg-2 add-space">
+                       
 
 
 
@@ -252,6 +252,10 @@ export default {
 
 .add-pb{
     padding-bottom: 5rem;
+}
+
+.add-space{
+    height: 70px;
 }
 
 @media (max-width: 992px) {

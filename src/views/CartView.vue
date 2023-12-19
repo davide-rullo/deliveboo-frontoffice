@@ -152,7 +152,7 @@ export default {
 }
 </script>
 <template>
-    <div class="bg_my_back">
+    <div class="bg_my_back" style="min-height: 45vh;">
         <h1 class="text-center pt-5">Your Cart</h1>
         <div class="container mt-5">
             <div v-if="this.state.selected_items == []">
@@ -167,10 +167,10 @@ export default {
 
                             <div class="col d-flex align-items-center justify-content-center">
 
-                                <img style="max-height: 100;" v-if="item.cover_image != null"
+                                <img style="max-width: 150px" height="auto" v-if="item.cover_image != null"
                                     :src="state.base_url + 'storage/' + item.cover_image" class=" img-fluid " alt="">
-                                <img style="max-height: 100;" v-else :src="state.base_url + `storage/covers/panino.jpg`"
-                                    class="" alt="">
+                                <img style="max-width: 150px" height="auto" v-else
+                                    :src="state.base_url + `storage/covers/panino.jpg`" class="" alt="">
 
                             </div>
                             <div class="col d-flex align-items-center justify-content-center">
@@ -185,7 +185,7 @@ export default {
                             </div>
                             <div class="col d-flex align-items-center justify-content-center">
                                 <span>
-                                    <h4>{{ item.itemsTotalPrice }} €</h4>
+                                    <h4>{{ item.itemsTotalPrice.toFixed(2) }} €</h4>
                                 </span>
                             </div>
                         </div>
@@ -197,6 +197,9 @@ export default {
                                 <button @click="clearCart()" type="button" class="btn btn-secondary ms-3">
                                     Clear Cart
                                 </button>
+
+                            </div>
+                            <div class="col">
 
                             </div>
                             <div class="col  d-flex align-items-center justify-content-center">

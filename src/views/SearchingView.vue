@@ -1,6 +1,13 @@
 <script>
 import axios from 'axios';
 import Loader from '../components/Loader.vue';
+// Import Swiper Vue.js components
+import { Swiper, SwiperSlide } from 'swiper/vue';
+// Import Swiper styles
+import 'swiper/scss';
+import 'swiper/css/navigation';
+// import required modules
+import { Navigation } from 'swiper/modules';
 
 export default {
     name: 'SearchingView',
@@ -15,10 +22,14 @@ export default {
             loading: true,
             types: null,
             selected_types: [],
+            modules: [Navigation],
+
         };
     },
     components: {
         Loader,
+        Swiper,
+        SwiperSlide,
     },
     methods: {
         getTypes(url) {
@@ -98,33 +109,138 @@ export default {
 
 <template>
     <div class="bg_my_back">
-        <div class="container py-5">
+        <div class="container">
 
             <div v-if="!loading">
-                <!-- Sezione delle tipologie di ristoranti -->
-                <div class="d-flex justify-content-center gap-4 mb-5 flex-wrap">
 
+                <!-- Swiper per schermi larghi (xl) -->
+                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-none d-sm-none d-md-none d-lg-none d-xl-block"
+                    :slides-per-view="7">
                     <!-- Bottone "See All Type" -->
-                    <div class="d-flex mb-3">
-                        <div class="types card bg-transparent border-0" @click="getRestaurants(base_url + apiRestaurants)"
-                            style="width: 5rem; text-align: center;">
-                            <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type" />
-                            <h5>All</h5>
+                    <swiper-slide class="d-flex justify-content-center align-items-center">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0"
+                                    @click="getRestaurants(base_url + apiRestaurants)">
+                                    <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type" />
+                                    <h5>All</h5>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </swiper-slide>
 
-                    <!-- Tipologie di ristoranti -->
-                    <div class="d-flex" v-for="tipology in types" :key="tipology.id">
-                        <div class="types card bg-transparent border-0" @click="fetchType(tipology.slug)"
-                            :class="{ 'active-type': selected_types.includes(tipology.slug) }"
-                            style="width: 6rem; text-align: center;">
-                            <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
-                                :alt="tipology.name" />
-                            <h5>{{ tipology.name }}</h5>
+                    <!-- Altri tipi -->
+                    <swiper-slide class="d-flex justify-content-center align-items-center" v-for="tipology in types"
+                        :key="tipology.id">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0" @click="fetchType(tipology.slug)"
+                                    :class="{ 'active-type': selected_types.includes(tipology.slug) }">
+                                    <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
+                                        :alt="tipology.name" />
+                                    <h5>{{ tipology.name }}</h5>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </swiper-slide>
+                </swiper>
+                
 
-                </div>
+                <!-- Swiper per schermi larghi (lg) -->
+                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-none d-sm-none d-md-none d-lg-block d-xl-none"
+                    :slides-per-view="6">
+                    <!-- Bottone "See All Type" -->
+                    <swiper-slide class="d-flex justify-content-center align-items-center">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0"
+                                    @click="getRestaurants(base_url + apiRestaurants)">
+                                    <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type" />
+                                    <h5>All</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </swiper-slide>
+
+                    <!-- Altri tipi -->
+                    <swiper-slide class="d-flex justify-content-center align-items-center" v-for="tipology in types"
+                        :key="tipology.id">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0" @click="fetchType(tipology.slug)"
+                                    :class="{ 'active-type': selected_types.includes(tipology.slug) }">
+                                    <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
+                                        :alt="tipology.name" />
+                                    <h5>{{ tipology.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+
+                <!-- Swiper per schermi medi (md) -->
+                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-none d-sm-none d-md-block d-lg-none d-xl-none"
+                    :slides-per-view="4">
+                    <!-- Bottone "See All Type" -->
+                    <swiper-slide class="d-flex justify-content-center align-items-center">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0"
+                                    @click="getRestaurants(base_url + apiRestaurants)">
+                                    <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type" />
+                                    <h5>All</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </swiper-slide>
+
+                    <!-- Altri tipi -->
+                    <swiper-slide class="d-flex justify-content-center align-items-center" v-for="tipology in types"
+                        :key="tipology.id">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0" @click="fetchType(tipology.slug)"
+                                    :class="{ 'active-type': selected_types.includes(tipology.slug) }">
+                                    <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
+                                        :alt="tipology.name" />
+                                    <h5>{{ tipology.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                </swiper>
+
+                <!-- Swiper per schermi piccoli (sm) -->
+                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-sm-block d-md-none d-lg-none d-xl-none"
+                    :slides-per-view="2">
+                    <!-- Bottone "See All Type" -->
+                    <swiper-slide class="d-flex justify-content-center align-items-center">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0"
+                                    @click="getRestaurants(base_url + apiRestaurants)">
+                                    <img class="img-fluid rounded" src="../assets/img/provalogo.png" alt="See All Type" />
+                                    <h5>All</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </swiper-slide>
+
+                    <!-- Altri tipi -->
+                    <swiper-slide class="d-flex justify-content-center align-items-center" v-for="tipology in types"
+                        :key="tipology.id">
+                        <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9">
+                            <div class="col">
+                                <div class="types card bg-transparent border-0" @click="fetchType(tipology.slug)"
+                                    :class="{ 'active-type': selected_types.includes(tipology.slug) }">
+                                    <img class="img-fluid rounded" :src="base_url + `storage/img/` + tipology.cover_image"
+                                        :alt="tipology.name" />
+                                    <h5>{{ tipology.name }}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </swiper-slide>
+                </swiper>
 
                 <!-- Griglia di cards per i ristoranti -->
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -235,5 +351,4 @@ export default {
             box-shadow: none; // Rimuovi la ombra al focus
         }
     }
-}
-</style>
+}</style>

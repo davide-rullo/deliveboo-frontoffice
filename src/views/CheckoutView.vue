@@ -21,6 +21,18 @@ export default {
         }
     },
 
+    computed: {
+        isFormValid() {
+            return (
+                this.customer_name !== '' &&
+                this.customer_email !== '' &&
+                this.customer_phone !== '' &&
+                this.customer_address !== '' &&
+                this.customer_message !== ''
+            );
+        },
+    },
+
     mounted() {
         this.state.selected_items = JSON.parse(localStorage.getItem('selected_items'));
 
@@ -210,7 +222,9 @@ export default {
                 <small id="messageHelper" class="form-text text-muted">Type your message</small>
             </div>
         </form>
-        <button id="submit-button" class="button button--small button--green mb-5" @click="makePayment()">Purchase</button>
+        <button v-if="isFormValid" id="submit-button" class="button button--small button--green mb-5"
+            @click="makePayment()">Purchase</button>
+
 
     </div>
 </template>

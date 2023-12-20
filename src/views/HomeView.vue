@@ -71,7 +71,7 @@ export default {
                         </p>
                     </div>
                     <div class="col-lg-2 add-space">
-                       
+
 
 
 
@@ -104,7 +104,7 @@ export default {
 
                 <div class="row">
                     <div class="col-12 col-md-4 text-center">
-                        <img class="img-fluid position-relative z-2" width="200px" src="../assets/img/mockupdeliv2.png"
+                        <img class="img-fluid position-relative z-2" width="200px" src="../assets/img/mockup-definitivo.png"
                             alt="">
                     </div>
                     <div class="col-12 col-md-8 text-center d-flex flex-column justify-content-center pb-4">
@@ -250,11 +250,11 @@ export default {
     margin: -1rem auto;
 }
 
-.add-pb{
+.add-pb {
     padding-bottom: 5rem;
 }
 
-.add-space{
+.add-space {
     height: 70px;
 }
 

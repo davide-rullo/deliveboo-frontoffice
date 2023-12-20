@@ -194,9 +194,7 @@ export default {
 
                             <div class="col d-flex align-items-center justify-content-start">
 
-                                <button @click="clearCart()" type="button" class="btn btn-secondary ms-3">
-                                    Clear Cart
-                                </button>
+                               
 
                             </div>
                             <div class="col">
@@ -216,9 +214,6 @@ export default {
                         </div>
                     </div>
                     <div class="col">
-
-
-
                     </div>
                 </div>
 
@@ -226,9 +221,16 @@ export default {
 
 
 
-                <div class="row pt-4 pb-4 justify-content-end">
+                <div class="row row-cols-1 row-cols-sm-4 align-items-center justify-content-around py-2 item_card bg_custom mt-3">
 
-                    <div class="col d-flex  justify-content-end">
+                <div class="col"></div>
+                <div class="col"></div>
+                <div class="col d-flex align-items-center justify-content-center">  <button @click="clearCart()" type="button" class="btn btn-secondary">
+                                                    Clear Cart
+                                                </button>
+                                            </div>
+
+                    <div class="col d-flex align-items-center justify-content-center ">
                         <button class="btn btn-outline-dark my-3 " type="button">
                             <router-link :to="{ name: 'Checkout' }">Go to Checkout</router-link>
                         </button>

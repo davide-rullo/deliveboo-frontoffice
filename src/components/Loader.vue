@@ -4,7 +4,7 @@ export default {
 }
 </script>
 <template>
-    <div class="vh-100 d-flex gap-3">
+    <div class="d-flex gap-3 py-5">
         <h2 class="my_text_dark-pink">Loading</h2>
         <div id="html-spinner"></div>
     </div>

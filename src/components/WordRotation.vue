@@ -2,7 +2,7 @@
 export default {
     data() {
         return {
-            words: ['Pizza', 'Sushi', 'Hamburgher', 'Poke', 'Chicken', 'Ramen', 'Kebab', 'Pasta', 'Paella'],
+            words: ['Pizza', 'Sushi', 'Hamburger', 'Poke', 'Chicken', 'Ramen', 'Kebab', 'Pasta', 'Paella'],
             currentWordIndex: 0,
             rotationInterval: null,
             isTransitioning: false,

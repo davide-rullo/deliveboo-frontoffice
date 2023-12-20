@@ -114,8 +114,8 @@ export default {
             <div v-if="!loading">
 
                 <!-- Swiper per schermi larghi (xl) -->
-                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-none d-sm-none d-md-none d-lg-none d-xl-block"
-                    :slides-per-view="7">
+                <swiper :rewind="true" :navigation="true" :modules="modules"
+                    class="mySwiper p-0 d-none d-sm-none d-md-none d-lg-none d-xl-block" :slides-per-view="7">
                     <!-- Bottone "See All Type" -->
                     <swiper-slide class="d-flex justify-content-center align-items-center">
                         <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
@@ -144,11 +144,11 @@ export default {
                         </div>
                     </swiper-slide>
                 </swiper>
-                
+
 
                 <!-- Swiper per schermi larghi (lg) -->
-                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-none d-sm-none d-md-none d-lg-block d-xl-none"
-                    :slides-per-view="6">
+                <swiper :rewind="true" :navigation="true" :modules="modules"
+                    class="mySwiper p-0 d-none d-sm-none d-md-none d-lg-block d-xl-none" :slides-per-view="6">
                     <!-- Bottone "See All Type" -->
                     <swiper-slide class="d-flex justify-content-center align-items-center">
                         <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
@@ -179,8 +179,8 @@ export default {
                 </swiper>
 
                 <!-- Swiper per schermi medi (md) -->
-                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-none d-sm-none d-md-block d-lg-none d-xl-none"
-                    :slides-per-view="4">
+                <swiper :rewind="true" :navigation="true" :modules="modules"
+                    class="mySwiper p-0 d-none d-sm-none d-md-block d-lg-none d-xl-none" :slides-per-view="4">
                     <!-- Bottone "See All Type" -->
                     <swiper-slide class="d-flex justify-content-center align-items-center">
                         <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
@@ -211,8 +211,8 @@ export default {
                 </swiper>
 
                 <!-- Swiper per schermi piccoli (sm) -->
-                <swiper :rewind="true" :navigation="true" :modules="modules" class="mySwiper p-0 d-sm-block d-md-none d-lg-none d-xl-none"
-                    :slides-per-view="2">
+                <swiper :rewind="true" :navigation="true" :modules="modules"
+                    class="mySwiper p-0 d-sm-block d-md-none d-lg-none d-xl-none" :slides-per-view="2">
                     <!-- Bottone "See All Type" -->
                     <swiper-slide class="d-flex justify-content-center align-items-center">
                         <div class="row row-cols-2 row-cols-md-6 row-cols-lg-9 mb-3">
@@ -276,7 +276,7 @@ export default {
                 </div>
             </div>
 
-            <div class="d-flex gap-2 align-items-center" v-else>
+            <div class="vh-100 d-flex gap-2 align-items-center justify-content-center" v-else>
                 <Loader></Loader>
             </div>
 
@@ -351,4 +351,5 @@ export default {
             box-shadow: none; // Rimuovi la ombra al focus
         }
     }
-}</style>
+}
+</style>

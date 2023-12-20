@@ -182,14 +182,14 @@ export default {
 
 </script>
 <template>
-    <div v-if="!loading">
+    <div v-if="!loading" class="bg_my_back">
         <div class="container">
             <div class="button-redirect d-flex justify-content-center">
                 <button class="btn btn-outline-dark my-3 " type="button">
                     <router-link :to="{ name: 'Cart' }">Back to Your Cart</router-link>
                 </button>
             </div>
-            <form id="payment-form" class=" mb-5" @submit.prevent>
+            <form id="payment-form" class=" pb-5" @submit.prevent>
                 <div id="dropin-container"></div>
                 <input type="submit" @click="prepareNonce()" value="Send" />
                 <input type="hidden" id="nonce" name="payment_method_nonce" />
@@ -197,7 +197,7 @@ export default {
             <!-- Form -->
             <form action="" class=" mt-5" v-if="this.nonce !== null">
                 <!-- name -->
-                <div class="mb-3">
+                <div class="pb-3">
                     <label for="customer_name" class="form-label">Name</label>
                     <input type="text" class="form-control" name="customer_name" id="customer_name"
                         aria-describedby="nameHelper" placeholder="Your Name" v-model="customer_name" />
@@ -224,7 +224,7 @@ export default {
                         aria-describedby="addressHelper" placeholder="Your address" v-model="customer_address" />
                     <!-- <small id="addressHelper" class="form-text text-muted">Type your address</small> -->
                 </div>
-                <div class="mb-3">
+                <div class="pb-3">
                     <label for="customer_message" class="form-label">Message</label>
 
                     <textarea name="customer_message" id="customer_message" rows="3" class="form-control"
@@ -241,8 +241,11 @@ export default {
         </div>
     </div>
 
-    <div v-else class="container d-flex gap-2 align-items-center">
-        <Loader></Loader>
+    <div v-else class="bg_my_back">
+        <div class="vh-100 d-flex gap-2 align-items-center justify-content-center container">
+
+            <Loader></Loader>
+        </div>
     </div>
 </template>
 

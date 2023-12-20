@@ -35,7 +35,7 @@ export default {
                         <li class="nav-item">
                             <router-link class="nav-link" active-class="active" to="/about">About us</router-link>
                         </li>
-                        
+
                     </ul>
                 </div>
 
@@ -52,7 +52,7 @@ export default {
                             </router-link>
                         </li>
                         <li class="nav-item ms-md-4 pt-2 pt-md-0"> <!-- Aggiunto margin-right per aggiungere spazio -->
-                            <a class="btn bg_my_dark-pink rounded-pill" href="http://127.0.0.1:8000/login">
+                            <a class="btn bg_my_dark-pink rounded-pill" href="http://127.0.0.1:8000/login" target="_blank">
                                 Login
                             </a>
                         </li>

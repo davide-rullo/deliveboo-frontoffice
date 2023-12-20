@@ -60,21 +60,23 @@ export default {
         slideShadows: true,
     }" :pagination="true" :modules="modules" class="mySwiper" :initialSlide="2">
         <swiper-slide v-for="restaurant in selected ">
-            <div class="card h-100 bg-transparent shadow border-0 rounded-top-0 rounded-bottom-5">
-                <div class="card-img-top rounded-top-0 rounded-bottom-5" v-if="restaurant.logo">
-                    <img class="img-fluid rounded-bottom-5" :src="base_url + `storage/` + restaurant.logo" alt="">
-                </div>
-                <div class="card-img-top rounded-top-0" v-else>
+            <router-link :to="{ name: 'restaurant', params: { slug: restaurant.slug } }">
+                <div class="card h-100 bg-transparent shadow border-0 rounded-top-0 rounded-bottom-5">
+                    <div class="card-img-top rounded-top-0 rounded-bottom-5" v-if="restaurant.logo">
+                        <img class="img-fluid rounded-bottom-5" :src="base_url + `storage/` + restaurant.logo" alt="">
+                    </div>
+                    <div class="card-img-top rounded-top-0" v-else>
 
-                    <img class="img-fluid rounded-top-0 rounded-bottom-5" :src="base_url + `storage/img/delivery.jpeg`"
-                        alt="">
-                </div>
+                        <img class="img-fluid rounded-top-0 rounded-bottom-5" :src="base_url + `storage/img/delivery.jpeg`"
+                            alt="">
+                    </div>
 
-                <div class="card-body">
-                    <h4 class="card-title">{{ restaurant.name }}</h4>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ restaurant.name }}</h4>
 
+                    </div>
                 </div>
-            </div>
+            </router-link>
         </swiper-slide>
 
     </swiper>

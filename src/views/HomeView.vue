@@ -204,6 +204,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.swiper {
+    padding-bottom: 100px;
+}
+
 .selected {
     background-color: #ffadad48;
     padding-top: 9rem;

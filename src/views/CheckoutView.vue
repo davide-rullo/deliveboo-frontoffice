@@ -22,6 +22,7 @@ export default {
             customer_address: '',
             customer_message: '',
             loading: false,
+            nonce: null,
 
         }
     },
@@ -188,13 +189,13 @@ export default {
                     <router-link :to="{ name: 'Cart' }">Back to Your Cart</router-link>
                 </button>
             </div>
-            <form id="payment-form">
+            <form id="payment-form" class=" mb-5" @submit.prevent>
                 <div id="dropin-container"></div>
-                <input type="submit" @click="prepareNonce()" />
+                <input type="submit" @click="prepareNonce()" value="Send" />
                 <input type="hidden" id="nonce" name="payment_method_nonce" />
             </form>
             <!-- Form -->
-            <form action="" class=" mt-5">
+            <form action="" class=" mt-5" v-if="this.nonce !== null">
                 <!-- name -->
                 <div class="mb-3">
                     <label for="customer_name" class="form-label">Name</label>

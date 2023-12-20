@@ -70,4 +70,13 @@ const router = createRouter({
     routes
 })
 
+router.beforeEach((to, from, next) => {
+    // Controlla se l'URL contiene il nonce e se l'utente sta navigando via dalla pagina del pagamento
+    if (from.path === '/checkout' && location.search.includes('payment_method_nonce')) {
+        // Rimuovi il nonce dall'URL
+        history.replaceState(history.state, '', location.pathname);
+    }
+    next();
+})
+
 export { router }
